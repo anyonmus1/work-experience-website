@@ -1,187 +1,299 @@
 import React from 'react';
+import { motion } from 'framer-motion';
+import { Rocket, Target, Users, Leaf, Code, Bell, Zap, Globe } from 'lucide-react';
 
-const roadmapItems = [
+const roadmapData = [
   {
-    phase: "Phase 1",
-    title: "Launch and Community Building",
+    phase: "Phase 1: Seeding the Fields",
+    timeline: "Q4 2024 - Q1 2025",
+    icon: <Rocket size={24} color="#713c4e" />, // Updated to red
     items: [
-      "Launch website and social media channels",
-      "Initial token distribution",
-      "Community building and engagement initiatives",
-      "Listing on decentralized exchanges"
-    ]
+      "Launch of CWB token on Ethereum mainnet",
+      "Initial exchange listings and liquidity provision",
+      "Community building initiatives and social media campaigns",
+      "Release of basic governance features for community voting",
+      "Development and testing of core smart contracts",
+      "Implementation of security measures and audits",
+      "Launch of community engagement programs"
+    ],
+    status: "upcoming"
   },
   {
-    phase: "Phase 2",
-    title: "Growth and Partnerships",
+    phase: "Phase 2: Nurturing Growth",
+    timeline: "Q2 2025 - Q3 2025",
+    icon: <Leaf size={24} color="#713c4e" />,
     items: [
-      "Major marketing campaigns",
-      "Strategic partnerships with meme creators",
-      "Launch of community governance platform",
-      "Listing on major centralized exchanges"
-    ]
+      "Launch of the May-Bellets Militia meme creation platform",
+      "Implementation of staking and yield farming features",
+      "Expansion of governance capabilities",
+      "Partnerships with key influencers and meme communities",
+      "First major marketing campaign",
+      "Launch of educational resources",
+      "Introduction of community rewards program"
+    ],
+    status: "planned"
   },
   {
-    phase: "Phase 3",
-    title: "Ecosystem Expansion",
+    phase: "Phase 3: Expanding the Pastures",
+    timeline: "Q4 2025 - Q2 2026",
+    icon: <Globe size={24} color="#713c4e" />,
     items: [
-      "Launch of NFT marketplace",
-      "Development of meme creation tools",
-      "Cross-chain integration",
-      "Expansion into DeFi protocols"
-    ]
+      "Integration with Binance Smart Chain for cross-chain functionality",
+      "Launch of NFT marketplace for meme trading",
+      "Implementation of DAO structure for fully decentralized governance",
+      "Development of educational resources",
+      "Exploration of Solana integration",
+      "Enhanced security features implementation",
+      "Strategic partnerships expansion"
+    ],
+    status: "planned"
   },
   {
-    phase: "Phase 4",
-    title: "Global Adoption",
+    phase: "Phase 4: Harvesting Innovation",
+    timeline: "Q3 2026 - Q4 2026",
+    icon: <Zap size={24} color="#713c4e" />,
     items: [
-      "Launch of mobile app",
-      "Integration with major e-commerce platforms",
-      "Sponsorship of meme contests and events",
-      "Establishment of [Your Meme Coin] Foundation"
-    ]
+      "Launch of May-Bellets DeFi suite",
+      "Implementation of layer 2 scaling solution",
+      "Major partnerships with traditional brands",
+      "First annual MooCon conference",
+      "Establishment of May-Bellets Grants program",
+      "Advanced trading features implementation",
+      "Global community expansion initiatives"
+    ],
+    status: "planned"
   }
 ];
+
 
 function Roadmap() {
   const styles = {
     roadmap: {
       paddingTop: '80px',
-      backgroundColor: '#116466',
-      color: '#D1E8E2',
+      backgroundColor: '#93b3d8', // Light blue
+      color: '#ffffff',
       minHeight: '100vh',
     },
     hero: {
       textAlign: 'center',
       padding: '4rem 2rem',
-      background: 'linear-gradient(rgba(13, 24, 29, 0.7), rgba(17, 100, 102, 0.7))',
-      backgroundImage: 'url("/path/to/your/roadmap-hero-image.jpg")',
+      background: 'linear-gradient(rgba(11, 23, 27, 0.8), rgba(40, 38, 90, 0.8))', // Dark blue to deep purple
       backgroundPosition: 'center',
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
     },
     heroTitle: {
-      fontSize: '3rem',
-      marginBottom: '1rem',
-      color: '#FFCB9A',
+      fontSize: 'clamp(2.5rem, 5vw, 4rem)',
+      marginBottom: '1.5rem',
+      color: '#efcea1', // Warm beige
     },
     heroText: {
-      fontSize: '1.2rem',
+      fontSize: 'clamp(1.1rem, 2vw, 1.3rem)',
       marginBottom: '2rem',
       maxWidth: '800px',
       margin: '0 auto',
+      lineHeight: '1.6',
+      color: '#ffffff',
     },
     content: {
       padding: '4rem 2rem',
-      backgroundColor: '#0D181D',
+      backgroundColor: '#0b171b', // Dark blue-black
+      position: 'relative',
     },
     timeline: {
-      position: 'relative',
       maxWidth: '1200px',
       margin: '0 auto',
+      position: 'relative',
+      paddingTop: '2rem',
     },
-    timelineLine: {
+    timelineConnector: {
       position: 'absolute',
       left: '50%',
+      transform: 'translateX(-50%)',
       width: '4px',
       height: '100%',
-      backgroundColor: '#D9B08C',
-      transform: 'translateX(-50%)',
-    },
-    timelineItem: {
-      position: 'relative',
-      width: '50%',
-      padding: '2rem',
-      boxSizing: 'border-box',
-      margin: '2rem 0',
-    },
-    timelineItemLeft: {
-      left: '0',
-      textAlign: 'right',
-    },
-    timelineItemRight: {
-      left: '50%',
-      textAlign: 'left',
-    },
-    timelineContent: {
-      padding: '1.5rem',
-      backgroundColor: '#116466',
-      borderRadius: '10px',
-      position: 'relative',
-    },
-    timelineContentLeft: {
-      marginRight: '2rem',
-    },
-    timelineContentRight: {
-      marginLeft: '2rem',
+      backgroundColor: '#713c4e', // Red
+      opacity: 0.3,
+      '@media (max-width: 768px)': {
+        left: '20px',
+      },
     },
     phase: {
-      position: 'absolute',
-      top: '0',
-      backgroundColor: '#FFCB9A',
-      color: '#0D181D',
-      padding: '0.5rem 1rem',
-      borderRadius: '20px',
+      display: 'flex',
+      marginBottom: '4rem',
+      position: 'relative',
+      '@media (max-width: 768px)': {
+        flexDirection: 'column',
+      },
+    },
+    phaseContent: {
+      flex: '1',
+      backgroundColor: 'rgba(147, 179, 216, 0.1)', // Light blue with opacity
+      borderRadius: '15px',
+      padding: '2rem',
+      margin: '0 2rem',
+      border: '1px solid rgba(255,255,255,0.1)',
+      position: 'relative',
+      transition: 'all 0.3s ease',
+      '@media (max-width: 768px)': {
+        margin: '1rem 0 1rem 3rem',
+      },
+    },
+    phaseHeader: {
+      display: 'flex',
+      alignItems: 'center',
+      marginBottom: '1.5rem',
+      gap: '1rem',
+    },
+    phaseTitle: {
+      color: '#efcea1', // Warm beige
+      fontSize: 'clamp(1.2rem, 3vw, 1.5rem)',
+      marginBottom: '0.5rem',
+    },
+    phaseTimeline: {
+      color: '#a7af75', // Sage green
+      fontSize: '1rem',
       fontWeight: 'bold',
     },
-    phaseLeft: {
-      right: '-1rem',
+    phaseIcon: {
+      backgroundColor: '#28265a', // Deep purple
+      padding: '1rem',
+      borderRadius: '50%',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      position: 'absolute',
+      left: '50%',
+      transform: 'translateX(-50%)',
+      zIndex: 2,
+      border: '2px solid #713c4e', // Red border
+      transition: 'all 0.3s ease',
+      '@media (max-width: 768px)': {
+        left: '0',
+      },
     },
-    phaseRight: {
-      left: '-1rem',
+    itemsList: {
+      listStyle: 'none',
+      padding: 0,
+      margin: 0,
     },
-    title: {
-      color: '#FFCB9A',
+    item: {
       marginBottom: '1rem',
-      fontSize: '1.5rem',
+      paddingLeft: '1.5rem',
+      position: 'relative',
+      color: '#93b3d8', // Light blue
+      '&:before': {
+        content: '"🐮"',
+        position: 'absolute',
+        left: 0,
+        top: '2px',
+      },
     },
-    list: {
-      listStyleType: 'none',
-      padding: '0',
-    },
-    listItem: {
-      marginBottom: '0.5rem',
+    disclaimer: {
+      textAlign: 'center',
+      padding: '2rem',
+      fontSize: '0.9rem',
+      opacity: 0.8,
+      maxWidth: '800px',
+      margin: '0 auto',
+      color: '#a7af75', // Sage green
     },
   };
 
   return (
     <div style={styles.roadmap}>
-      <div style={styles.hero}>
-        <h1 style={styles.heroTitle}>Our Roadmap</h1>
-        <p style={styles.heroText}>
-          Explore the exciting journey ahead for [Your Meme Coin Name]. 
-          From launch to global adoption, we've got big plans for the future!
-        </p>
-      </div>
+      <motion.div 
+        style={styles.hero}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+      >
+        <motion.h1 
+          style={styles.heroTitle}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          Our Roadmap
+        </motion.h1>
+        <motion.p 
+          style={styles.heroText}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          Follow the May-Bellets Militia's journey as we cultivate a revolutionary 
+          ecosystem in the crypto pastures. Our detailed roadmap outlines the key 
+          milestones in our mission to transform the meme coin landscape.
+        </motion.p>
+      </motion.div>
+
       <div style={styles.content}>
         <div style={styles.timeline}>
-          <div style={styles.timelineLine}></div>
-          {roadmapItems.map((item, index) => (
-            <div 
-              key={index} 
-              style={{
-                ...styles.timelineItem, 
-                ...(index % 2 === 0 ? styles.timelineItemLeft : styles.timelineItemRight)
-              }}
+          <div style={styles.timelineConnector} />
+          {roadmapData.map((phase, index) => (
+            <motion.div
+              key={index}
+              style={styles.phase}
+              initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: index * 0.2 }}
             >
-              <div style={{
-                ...styles.timelineContent,
-                ...(index % 2 === 0 ? styles.timelineContentLeft : styles.timelineContentRight)
-              }}>
-                <div style={{
-                  ...styles.phase,
-                  ...(index % 2 === 0 ? styles.phaseLeft : styles.phaseRight)
-                }}>{item.phase}</div>
-                <h3 style={styles.title}>{item.title}</h3>
-                <ul style={styles.list}>
-                  {item.items.map((listItem, listIndex) => (
-                    <li key={listIndex} style={styles.listItem}>{listItem}</li>
+              <motion.div 
+                style={styles.phaseIcon}
+                whileHover={{
+                  backgroundColor: '#713c4e', // Red
+                  transform: 'translateX(-50%) scale(1.1)',
+                  boxShadow: '0 0 20px rgba(252, 255, 244, 0.3)', // Red glow
+                }}
+              >
+                {phase.icon}
+              </motion.div>
+              <motion.div 
+                style={styles.phaseContent}
+                whileHover={{ 
+                  scale: 1.02,
+                  boxShadow: '0 10px 30px rgba(252, 255, 244, 0.1)', // Red glow
+                  border: '1px solid rgba(252, 255, 244, 0.2)', // Red border
+                }}
+              >
+                <div style={styles.phaseHeader}>
+                  <div>
+                    <h2 style={styles.phaseTitle}>{phase.phase}</h2>
+                    <p style={styles.phaseTimeline}>{phase.timeline}</p>
+                  </div>
+                </div>
+                <ul style={styles.itemsList}>
+                  {phase.items.map((item, itemIndex) => (
+                    <motion.li
+                      key={itemIndex}
+                      style={styles.item}
+                      initial={{ opacity: 0, x: 20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: (index * 0.2) + (itemIndex * 0.1) }}
+                    >
+                      {item}
+                    </motion.li>
                   ))}
                 </ul>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           ))}
         </div>
+
+        <motion.p 
+          style={styles.disclaimer}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 0.8 }}
+          viewport={{ once: true }}
+        >
+          This roadmap is a living document and may be adjusted based on technological 
+          advancements, market conditions, and community feedback. We're committed to 
+          transparency and will keep our community informed of any changes or updates 
+          to our plans.
+        </motion.p>
       </div>
     </div>
   );
