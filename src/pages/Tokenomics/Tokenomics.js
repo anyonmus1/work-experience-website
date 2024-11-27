@@ -148,13 +148,18 @@ function Tokenomics() {
       alignItems: 'center',
       justifyContent: 'center',
       transition: 'all 0.3s ease',
+      width: '56px', // Added fixed width
+      height: '56px', // Added fixed height
+      marginBottom: '1rem',
     },
     icon: {
       color: '#713c4e',
       transition: 'color 0.3s ease',
+      display: 'flex', // Added display flex
+      alignItems: 'center', // Added align items
+      justifyContent: 'center', // Added justify content
     },
   };
-
   const distributionData = [
     { name: 'Community Rewards & Ecosystem', value: 50, color: '#713c4e' },
     { name: 'Liquidity Provision', value: 30, color: '#efcea1' },
@@ -166,17 +171,17 @@ function Tokenomics() {
     {
       title: "Anti-Whale Mechanisms",
       description: "Transaction limits and strategic measures to prevent market manipulation by large holders",
-      icon: <Shield size={24} color="#28265a" />
+      icon: <Shield size={24} style={{ minWidth: '24px', minHeight: '24px' }} /> // Added fixed dimensions
     },
     {
       title: "Vesting Schedule",
       description: "12-month cliff followed by 36-month linear vesting for founder allocations",
-      icon: <LineChart size={24} color="#713c4e" />
+      icon: <LineChart size={24} style={{ minWidth: '24px', minHeight: '24px' }} />
     },
     {
       title: "Liquidity Locks",
       description: "Initial liquidity locked for 12 months to ensure stability",
-      icon: <BarChart size={24} color="#713c4e" />
+      icon: <BarChart size={24} style={{ minWidth: '24px', minHeight: '24px' }} />
     }
   ];
 
