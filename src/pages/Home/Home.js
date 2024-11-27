@@ -1,8 +1,11 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { Shield, Users, Rocket, ChartBar, Bell, Leaf, Target, Heart } from 'lucide-react';
 
 function Home() {
+  // Hook to respect user's motion preferences
+  const prefersReducedMotion = useReducedMotion();
+
   const styles = {
     home: {
       paddingTop: '80px',
@@ -13,36 +16,43 @@ function Home() {
     },
     hero: {
       textAlign: 'center',
-      padding: '6rem 2rem',
+      padding: '4rem 1rem',
       background: 'linear-gradient(rgba(11, 23, 27, 0.8), rgba(40, 38, 90, 0.8))',
       backgroundPosition: 'center',
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
       position: 'relative',
+      '@media (min-width: 768px)': {
+        padding: '6rem 2rem',
+      },
     },
     heroTitle: {
-      fontSize: 'clamp(2.5rem, 5vw, 4rem)',
+      fontSize: 'clamp(2rem, 5vw, 4rem)',
       marginBottom: '1.5rem',
       color: '#efcea1',
+      wordBreak: 'break-word',
     },
     heroSubtitle: {
-      fontSize: 'clamp(1.5rem, 3vw, 2rem)',
+      fontSize: 'clamp(1.2rem, 3vw, 2rem)',
       color: '#a7af75',
       marginBottom: '2rem',
+      wordBreak: 'break-word',
     },
     heroText: {
-      fontSize: 'clamp(1.1rem, 2vw, 1.3rem)',
+      fontSize: 'clamp(1rem, 2vw, 1.3rem)',
       marginBottom: '2.5rem',
       maxWidth: '800px',
       margin: '0 auto',
       lineHeight: '1.6',
       color: '#ffffff',
+      padding: '0 1rem',
     },
     ctaContainer: {
       display: 'flex',
       gap: '1rem',
       justifyContent: 'center',
       flexWrap: 'wrap',
+      padding: '0 1rem',
     },
     ctaButton: {
       display: 'inline-flex',
@@ -50,15 +60,19 @@ function Home() {
       gap: '0.5rem',
       backgroundColor: '#713c4e',
       color: '#0b171b',
-      padding: '1rem 2rem',
+      padding: '0.875rem 1.5rem',
       borderRadius: '50px',
       textDecoration: 'none',
       fontWeight: 'bold',
-      fontSize: '1.1rem',
+      fontSize: 'clamp(0.9rem, 2vw, 1.1rem)',
       border: '2px solid transparent',
       cursor: 'pointer',
       boxShadow: '0 4px 15px rgba(252, 255, 244, 0.2)',
       transition: 'all 0.3s ease',
+      whiteSpace: 'nowrap',
+      '@media (min-width: 768px)': {
+        padding: '1rem 2rem',
+      },
     },
     secondaryCta: {
       backgroundColor: 'transparent',
@@ -67,15 +81,19 @@ function Home() {
     },
     features: {
       display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-      gap: '2rem',
-      padding: '4rem 2rem',
+      gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+      gap: '1.5rem',
+      padding: '2rem 1rem',
       backgroundColor: '#0b171b',
       maxWidth: '1400px',
       margin: '0 auto',
+      '@media (min-width: 768px)': {
+        padding: '4rem 2rem',
+        gap: '2rem',
+      },
     },
     feature: {
-      padding: '2rem',
+      padding: '1.5rem',
       backgroundColor: 'rgba(147, 179, 216, 0.1)',
       borderRadius: '15px',
       border: '1px solid rgba(255,255,255,0.1)',
@@ -87,6 +105,9 @@ function Home() {
       position: 'relative',
       overflow: 'hidden',
       transition: 'all 0.3s ease',
+      '@media (min-width: 768px)': {
+        padding: '2rem',
+      },
     },
     featureIcon: {
       backgroundColor: '#28265a',
@@ -105,31 +126,42 @@ function Home() {
     },
     featureTitle: {
       color: '#efcea1',
-      fontSize: '1.5rem',
+      fontSize: 'clamp(1.2rem, 2.5vw, 1.5rem)',
       marginBottom: '1rem',
       fontWeight: 'bold',
+      wordBreak: 'break-word',
     },
     stats: {
-      padding: '4rem 2rem',
+      padding: '2rem 1rem',
       backgroundColor: '#93b3d8',
+      '@media (min-width: 768px)': {
+        padding: '4rem 2rem',
+      },
     },
     statsGrid: {
       display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-      gap: '2rem',
+      gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+      gap: '1.5rem',
       maxWidth: '1200px',
       margin: '0 auto',
+      '@media (min-width: 768px)': {
+        gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+        gap: '2rem',
+      },
     },
     stat: {
       backgroundColor: 'rgba(40, 38, 90, 0.1)',
-      padding: '2rem',
+      padding: '1.5rem',
       borderRadius: '15px',
       textAlign: 'center',
       border: '1px solid rgba(147, 179, 216, 0.1)',
       transition: 'all 0.3s ease',
+      '@media (min-width: 768px)': {
+        padding: '2rem',
+      },
     },
     statValue: {
-      fontSize: '2.5rem',
+      fontSize: 'clamp(2rem, 4vw, 2.5rem)',
       fontWeight: 'bold',
       color: '#713c4e',
       marginBottom: '0.5rem',
@@ -137,23 +169,27 @@ function Home() {
     },
     statLabel: {
       color: '#28265a',
-      fontSize: '1.1rem',
+      fontSize: 'clamp(1rem, 2vw, 1.1rem)',
     },
     manifestoSection: {
-      padding: '4rem 2rem',
+      padding: '2rem 1rem',
       backgroundColor: '#0b171b',
       textAlign: 'center',
+      '@media (min-width: 768px)': {
+        padding: '4rem 2rem',
+      },
     },
     manifestoContent: {
       maxWidth: '800px',
       margin: '0 auto',
     },
     manifestoQuote: {
-      fontSize: 'clamp(1.2rem, 2.5vw, 1.8rem)',
+      fontSize: 'clamp(1.1rem, 2.5vw, 1.8rem)',
       color: '#a7af75',
       fontStyle: 'italic',
       lineHeight: '1.6',
       marginBottom: '2rem',
+      padding: '0 1rem',
     },
   };
 
@@ -190,35 +226,41 @@ function Home() {
     }
   ];
 
+  // Optimized animation variants
+  const fadeInUp = {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: prefersReducedMotion ? 0 : 0.4 }
+  };
+
+  const scaleHover = prefersReducedMotion ? {} : {
+    scale: 1.05,
+    transition: { duration: 0.2 }
+  };
+
   return (
     <div style={styles.home}>
       <motion.div 
         style={styles.hero}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
+        transition={{ duration: prefersReducedMotion ? 0 : 0.6 }}
       >
         <motion.h1 
           style={styles.heroTitle}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          {...fadeInUp}
         >
           Welcome to CowWifBell
         </motion.h1>
         <motion.h2
           style={styles.heroSubtitle}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          {...fadeInUp}
         >
           The May-Bellets Militia
         </motion.h2>
         <motion.p 
           style={styles.heroText}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
+          {...fadeInUp}
         >
           Join our revolutionary campaign to reclaim the spirit of community, security, and fun 
           in the meme coin landscape. Led by Field General May Bell, we're here to change the 
@@ -226,21 +268,19 @@ function Home() {
         </motion.p>
         <motion.div 
           style={styles.ctaContainer}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
+          {...fadeInUp}
         >
           <motion.a
             href="/about"
             style={styles.ctaButton}
-            whileHover={{ 
+            whileHover={prefersReducedMotion ? {} : { 
               scale: 1.05,
               backgroundColor: '#28265a',
               color: '#713c4e',
               border: '2px solid #713c4e',
               boxShadow: '0 6px 20px rgba(252, 255, 244, 0.3)',
             }}
-            whileTap={{ scale: 0.95 }}
+            whileTap={prefersReducedMotion ? {} : { scale: 0.95 }}
           >
             <Users size={20} />
             Join the Militia
@@ -248,13 +288,13 @@ function Home() {
           <motion.a
             href="/tokenomics"
             style={{...styles.ctaButton, ...styles.secondaryCta}}
-            whileHover={{ 
+            whileHover={prefersReducedMotion ? {} : { 
               scale: 1.05,
               backgroundColor: '#713c4e',
               color: '#0b171b',
               border: '2px solid #713c4e',
             }}
-            whileTap={{ scale: 0.95 }}
+            whileTap={prefersReducedMotion ? {} : { scale: 0.95 }}
           >
             <ChartBar size={20} />
             View Tokenomics
@@ -266,7 +306,7 @@ function Home() {
         style={styles.features}
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
+        viewport={{ once: true, margin: "-50px" }}
       >
         {features.map((feature, index) => (
           <motion.div
@@ -275,8 +315,8 @@ function Home() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: index * 0.1 }}
-            whileHover={{ 
+            transition={{ delay: prefersReducedMotion ? 0 : index * 0.1 }}
+            whileHover={prefersReducedMotion ? {} : { 
               y: -10,
               boxShadow: '0 10px 30px rgba(252, 255, 244, 0.1)',
               border: '1px solid rgba(252, 255, 244, 0.2)',
@@ -284,13 +324,13 @@ function Home() {
           >
             <motion.div 
               style={styles.featureIcon}
-              whileHover={{
+              whileHover={prefersReducedMotion ? {} : {
                 backgroundColor: '#713c4e',
               }}
             >
               <motion.div
                 style={styles.icon}
-                whileHover={{
+                whileHover={prefersReducedMotion ? {} : {
                   color: '#28265a',
                 }}
               >
@@ -334,8 +374,8 @@ function Home() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              whileHover={{ 
+              transition={{ delay: prefersReducedMotion ? 0 : index * 0.1 }}
+              whileHover={prefersReducedMotion ? {} : { 
                 y: -10,
                 boxShadow: '0 10px 30px rgba(252, 255, 244, 0.1)',
                 border: '1px solid rgba(252, 255, 244, 0.2)',
@@ -360,7 +400,7 @@ function Home() {
             community, our shield is our security, and our spirit is the joy we bring to the 
             world of cryptocurrency."
           </blockquote>
-          <p style={{ color: '#ffffff' }}>- Field General May Bell</p>
+          <p style={{ color: '#ffffff', fontSize: 'clamp(0.9rem, 2vw, 1rem)' }}>- Field General May Bell</p>
         </motion.div>
       </div>
     </div>

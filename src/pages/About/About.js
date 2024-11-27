@@ -1,113 +1,106 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { Shield, Users, Target, Rocket, Bell, Heart, Code, Leaf, Star } from 'lucide-react';
 
 function About() {
+  const prefersReducedMotion = useReducedMotion();
+
   const styles = {
     about: {
       paddingTop: '80px',
-      backgroundColor: '#93b3d8', // Light blue base
+      backgroundColor: '#93b3d8',
       color: '#ffffff',
+      overflowX: 'hidden',
     },
     hero: {
       textAlign: 'center',
-      padding: '4rem 2rem',
-      background: 'linear-gradient(rgba(11, 23, 27, 0.8), rgba(40, 38, 90, 0.8))', // Dark blue to deep purple gradient
+      padding: '3rem 1rem',
+      background: 'linear-gradient(rgba(11, 23, 27, 0.8), rgba(40, 38, 90, 0.8))',
       backgroundPosition: 'center',
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
+      '@media (min-width: 768px)': {
+        padding: '4rem 2rem',
+      },
     },
     heroTitle: {
-      fontSize: 'clamp(2.5rem, 5vw, 4rem)',
+      fontSize: 'clamp(2rem, 5vw, 4rem)',
       marginBottom: '1.5rem',
-      color: '#efcea1', // Warm beige
+      color: '#efcea1',
+      wordBreak: 'break-word',
     },
     heroText: {
-      fontSize: 'clamp(1.1rem, 2vw, 1.3rem)',
+      fontSize: 'clamp(1rem, 2vw, 1.3rem)',
       marginBottom: '2rem',
       maxWidth: '800px',
       margin: '0 auto',
       lineHeight: '1.6',
       color: '#ffffff',
+      padding: '0 1rem',
     },
     content: {
-      padding: '4rem 2rem',
-      backgroundColor: '#0b171b', // Dark blue-black
+      padding: '2rem 1rem',
+      backgroundColor: '#0b171b',
+      '@media (min-width: 768px)': {
+        padding: '4rem 2rem',
+      },
     },
     section: {
       maxWidth: '1200px',
-      margin: '0 auto 6rem',
+      margin: '0 auto 4rem',
+      '@media (min-width: 768px)': {
+        margin: '0 auto 6rem',
+      },
     },
     sectionTitle: {
-      fontSize: 'clamp(1.8rem, 3vw, 2.5rem)',
-      color: '#a7af75', // Sage green
+      fontSize: 'clamp(1.5rem, 3vw, 2.5rem)',
+      color: '#a7af75',
       marginBottom: '2rem',
       textAlign: 'center',
+      wordBreak: 'break-word',
     },
     sectionContent: {
-      fontSize: '1.1rem',
+      fontSize: 'clamp(1rem, 2vw, 1.1rem)',
       lineHeight: '1.8',
       marginBottom: '2rem',
-      color: '#93b3d8', // Light blue
+      color: '#93b3d8',
     },
     quote: {
       fontStyle: 'italic',
-      color: '#efcea1', // Warm beige
-      fontSize: '1.2rem',
+      color: '#efcea1',
+      fontSize: 'clamp(1.1rem, 2vw, 1.2rem)',
       textAlign: 'center',
       margin: '2rem 0',
-      padding: '2rem',
-      borderLeft: '4px solid #713c4e', // Red accent
-      backgroundColor: 'rgba(252, 255, 244, 0.05)', // Subtle red background
+      padding: '1.5rem',
+      borderLeft: '4px solid #713c4e',
+      backgroundColor: 'rgba(252, 255, 244, 0.05)',
+      '@media (min-width: 768px)': {
+        padding: '2rem',
+      },
     },
     grid: {
       display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-      gap: '2rem',
-      margin: '3rem 0',
+      gridTemplateColumns: '1fr',
+      gap: '1.5rem',
+      margin: '2rem 0',
+      '@media (min-width: 640px)': {
+        gridTemplateColumns: 'repeat(2, 1fr)',
+      },
+      '@media (min-width: 1024px)': {
+        gridTemplateColumns: 'repeat(3, 1fr)',
+        gap: '2rem',
+        margin: '3rem 0',
+      },
     },
     card: {
-      backgroundColor: 'rgba(147, 179, 216, 0.1)', // Light blue with opacity
-      padding: '2rem',
+      backgroundColor: 'rgba(147, 179, 216, 0.1)',
+      padding: '1.5rem',
       borderRadius: '15px',
       border: '1px solid rgba(255,255,255,0.1)',
       transition: 'all 0.3s ease',
-    },
-    cardIcon: {
-      backgroundColor: '#28265a', // Deep purple
-      padding: '1rem',
-      borderRadius: '50%',
-      display: 'inline-block',
-      marginBottom: '1rem',
-      transition: 'all 0.3s ease',
-    },
-    cardTitle: {
-      color: '#efcea1', // Warm beige
-      fontSize: '1.5rem',
-      marginBottom: '1rem',
-    },
-    teamSection: {
-      textAlign: 'center',
-      marginBottom: '4rem',
-    },
-    valueProps: {
-      display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-      gap: '2rem',
-      margin: '3rem 0',
-    },
-    footer: {
-      textAlign: 'center',
-      padding: '4rem 2rem',
-      backgroundColor: 'rgba(40, 38, 90, 0.2)', // Deep purple with opacity
-    },
-    roleText: {
-      color: '#713c4e', // Red accent for emphasis
-      fontWeight: 'bold',
-      marginBottom: '0.5rem',
-    },
-    experienceText: {
-      color: '#93b3d8', // Light blue
+      '@media (min-width: 768px)': {
+        padding: '2rem',
+      },
     },
     featureIcon: {
       backgroundColor: '#28265a',
@@ -119,11 +112,49 @@ function About() {
       transition: 'all 0.3s ease',
     },
     icon: {
-      color: '#713c4e', // Start with red color
+      color: '#713c4e',
       transition: 'color 0.3s ease',
     },
+    cardTitle: {
+      color: '#efcea1',
+      fontSize: 'clamp(1.2rem, 2.5vw, 1.5rem)',
+      marginBottom: '1rem',
+      wordBreak: 'break-word',
+    },
+    teamSection: {
+      textAlign: 'center',
+      marginBottom: '4rem',
+    },
+    valueProps: {
+      display: 'grid',
+      gridTemplateColumns: '1fr',
+      gap: '1.5rem',
+      margin: '2rem 0',
+      '@media (min-width: 768px)': {
+        gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+        gap: '2rem',
+        margin: '3rem 0',
+      },
+    },
+    footer: {
+      textAlign: 'center',
+      padding: '2rem 1rem',
+      backgroundColor: 'rgba(40, 38, 90, 0.2)',
+      '@media (min-width: 768px)': {
+        padding: '4rem 2rem',
+      },
+    },
+    roleText: {
+      color: '#713c4e',
+      fontWeight: 'bold',
+      marginBottom: '0.5rem',
+      fontSize: 'clamp(0.9rem, 2vw, 1rem)',
+    },
+    experienceText: {
+      color: '#93b3d8',
+      fontSize: 'clamp(0.9rem, 2vw, 1rem)',
+    },
   };
-  
 
   const corePillars = [
     {
@@ -164,27 +195,39 @@ function About() {
     }
   ];
 
+  // Optimized animation variants
+  const fadeInUp = {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: prefersReducedMotion ? 0 : 0.4 }
+  };
+
+  const cardVariants = {
+    initial: { opacity: 0, y: 20 },
+    animate: { 
+      opacity: 1, 
+      y: 0,
+      transition: { duration: prefersReducedMotion ? 0 : 0.4 }
+    }
+  };
+
   return (
     <div style={styles.about}>
       <motion.div 
         style={styles.hero}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
+        transition={{ duration: prefersReducedMotion ? 0 : 0.6 }}
       >
         <motion.h1 
           style={styles.heroTitle}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          {...fadeInUp}
         >
           About CowWifBell
         </motion.h1>
         <motion.p 
           style={styles.heroText}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          {...fadeInUp}
         >
           Welcome to the May-Bellets Militia, where we're revolutionizing the meme coin landscape 
           through community, security, and sustainable innovation.
@@ -195,9 +238,7 @@ function About() {
         <section style={styles.section}>
           <motion.h2 
             style={styles.sectionTitle}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            {...fadeInUp}
           >
             Our Story
           </motion.h2>
@@ -222,17 +263,17 @@ function About() {
             style={styles.grid}
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "-50px" }}
           >
             {corePillars.map((pillar, index) => (
               <motion.div
                 key={index}
                 style={styles.card}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                variants={cardVariants}
+                initial="initial"
+                whileInView="animate"
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ 
+                whileHover={prefersReducedMotion ? {} : { 
                   y: -10,
                   boxShadow: '0 10px 30px rgba(252, 255, 244, 0.1)',
                   border: '1px solid rgba(252, 255, 244, 0.2)',
@@ -240,13 +281,13 @@ function About() {
               >
                 <motion.div 
                   style={styles.featureIcon}
-                  whileHover={{
+                  whileHover={prefersReducedMotion ? {} : {
                     backgroundColor: '#713c4e',
                   }}
                 >
                   <motion.div
                     style={styles.icon}
-                    whileHover={{
+                    whileHover={prefersReducedMotion ? {} : {
                       color: '#28265a',
                     }}
                   >
@@ -263,9 +304,7 @@ function About() {
         <section style={styles.teamSection}>
           <motion.h2 
             style={styles.sectionTitle}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            {...fadeInUp}
           >
             The Team Behind the Moo-vement
           </motion.h2>
@@ -279,11 +318,11 @@ function About() {
               <motion.div
                 key={index}
                 style={styles.card}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                variants={cardVariants}
+                initial="initial"
+                whileInView="animate"
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ 
+                whileHover={prefersReducedMotion ? {} : { 
                   y: -10,
                   boxShadow: '0 10px 30px rgba(252, 255, 244, 0.1)',
                   border: '1px solid rgba(252, 255, 244, 0.2)',
@@ -291,13 +330,13 @@ function About() {
               >
                 <motion.div 
                   style={styles.featureIcon}
-                  whileHover={{
+                  whileHover={prefersReducedMotion ? {} : {
                     backgroundColor: '#713c4e',
                   }}
                 >
                   <motion.div
                     style={styles.icon}
-                    whileHover={{
+                    whileHover={prefersReducedMotion ? {} : {
                       color: '#28265a',
                     }}
                   >

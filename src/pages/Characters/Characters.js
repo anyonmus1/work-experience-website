@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { Badge, Shield, Code, Heart, Users } from 'lucide-react';
 
 const characters = [
@@ -46,6 +46,8 @@ const characters = [
 ];
 
 function Characters() {
+  const prefersReducedMotion = useReducedMotion();
+
   const styles = {
     characters: {
       paddingTop: '80px',
@@ -54,44 +56,60 @@ function Characters() {
       minHeight: '100vh',
       display: 'flex',
       flexDirection: 'column',
+      overflowX: 'hidden',
     },
     hero: {
       textAlign: 'center',
-      padding: '6rem 2rem',
+      padding: '3rem 1rem',
       background: 'linear-gradient(rgba(11, 23, 27, 0.8), rgba(40, 38, 90, 0.8))',
       backgroundPosition: 'center',
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
       position: 'relative',
+      '@media (min-width: 768px)': {
+        padding: '6rem 2rem',
+      },
     },
     heroTitle: {
-      fontSize: 'clamp(2.5rem, 5vw, 4rem)',
+      fontSize: 'clamp(2rem, 5vw, 4rem)',
       marginBottom: '1.5rem',
       color: '#efcea1',
+      wordBreak: 'break-word',
     },
     heroSubtitle: {
-      fontSize: 'clamp(1.2rem, 3vw, 1.8rem)',
+      fontSize: 'clamp(1.1rem, 2.5vw, 1.8rem)',
       color: '#a7af75',
       marginBottom: '2rem',
       maxWidth: '800px',
       margin: '0 auto',
+      padding: '0 1rem',
     },
     content: {
-      padding: '4rem 2rem',
+      padding: '2rem 1rem',
       backgroundColor: '#0b171b',
       flex: 1,
+      '@media (min-width: 768px)': {
+        padding: '4rem 2rem',
+      },
     },
     charactersGrid: {
       display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-      gap: '3rem',
+      gridTemplateColumns: '1fr',
+      gap: '2rem',
       maxWidth: '1400px',
       margin: '0 auto',
+      '@media (min-width: 640px)': {
+        gridTemplateColumns: 'repeat(2, 1fr)',
+      },
+      '@media (min-width: 1024px)': {
+        gridTemplateColumns: 'repeat(3, 1fr)',
+        gap: '3rem',
+      },
     },
     characterCard: {
       backgroundColor: 'rgba(147, 179, 216, 0.1)',
       borderRadius: '20px',
-      padding: '2rem',
+      padding: '1.5rem',
       textAlign: 'center',
       border: '1px solid rgba(255,255,255,0.1)',
       display: 'flex',
@@ -100,14 +118,23 @@ function Characters() {
       position: 'relative',
       overflow: 'hidden',
       transition: 'all 0.3s ease',
+      '@media (min-width: 768px)': {
+        padding: '2rem',
+      },
     },
     characterImageContainer: {
       position: 'relative',
       marginBottom: '1.5rem',
+      width: '160px',
+      height: '160px',
+      '@media (min-width: 768px)': {
+        width: '180px',
+        height: '180px',
+      },
     },
     characterImage: {
-      width: '180px',
-      height: '180px',
+      width: '100%',
+      height: '100%',
       objectFit: 'cover',
       borderRadius: '50%',
       border: '4px solid #713c4e',
@@ -126,24 +153,26 @@ function Characters() {
       alignItems: 'center',
       justifyContent: 'center',
       transition: 'all 0.3s ease',
+      zIndex: 1,
     },
     icon: {
       color: '#713c4e',
       transition: 'color 0.3s ease',
     },
     characterName: {
-      fontSize: '1.8rem',
+      fontSize: 'clamp(1.5rem, 3vw, 1.8rem)',
       color: '#efcea1',
       marginBottom: '0.5rem',
+      wordBreak: 'break-word',
     },
     characterRole: {
-      fontSize: '1.1rem',
+      fontSize: 'clamp(1rem, 2vw, 1.1rem)',
       color: '#713c4e',
       marginBottom: '1.5rem',
       fontStyle: 'italic',
     },
     characterDescription: {
-      fontSize: '1rem',
+      fontSize: 'clamp(0.9rem, 2vw, 1rem)',
       color: '#93b3d8',
       lineHeight: '1.6',
       marginBottom: '1.5rem',
@@ -157,15 +186,19 @@ function Characters() {
       transition: 'all 0.3s ease',
     },
     quote: {
-      fontSize: '0.95rem',
+      fontSize: 'clamp(0.9rem, 2vw, 0.95rem)',
       fontStyle: 'italic',
       color: '#a7af75',
+      lineHeight: '1.4',
     },
     quoteMark: {
       position: 'absolute',
-      fontSize: '3rem',
+      fontSize: '2rem',
       opacity: 0.2,
       color: '#713c4e',
+      '@media (min-width: 768px)': {
+        fontSize: '3rem',
+      },
     },
     quoteMarkLeft: {
       top: '-10px',
@@ -177,27 +210,39 @@ function Characters() {
     },
   };
 
+  // Optimized animation variants
+  const fadeInUp = {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: prefersReducedMotion ? 0 : 0.4 }
+  };
+
+  const cardVariants = {
+    initial: { opacity: 0, y: 30 },
+    animate: { 
+      opacity: 1, 
+      y: 0,
+      transition: { duration: prefersReducedMotion ? 0 : 0.4 }
+    }
+  };
+
   return (
     <div style={styles.characters}>
       <motion.div 
         style={styles.hero}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
+        transition={{ duration: prefersReducedMotion ? 0 : 0.6 }}
       >
         <motion.h1 
           style={styles.heroTitle}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          {...fadeInUp}
         >
           Meet the Militia
         </motion.h1>
         <motion.p 
           style={styles.heroSubtitle}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          {...fadeInUp}
         >
           Get to know the elite team leading the charge in our mission to revolutionize 
           the meme coin landscape and restore trust to the crypto pastures!
@@ -212,7 +257,7 @@ function Characters() {
           variants={{
             visible: {
               transition: {
-                staggerChildren: 0.2
+                staggerChildren: prefersReducedMotion ? 0 : 0.15
               }
             }
           }}
@@ -221,17 +266,8 @@ function Characters() {
             <motion.div
               key={index}
               style={styles.characterCard}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ 
-                opacity: 1, 
-                y: 0,
-                transition: { 
-                  duration: 0.6,
-                  delay: index * 0.1 
-                }
-              }}
-              viewport={{ once: true }}
-              whileHover={{ 
+              variants={cardVariants}
+              whileHover={prefersReducedMotion ? {} : { 
                 y: -10,
                 boxShadow: '0 10px 30px rgba(252, 255, 244, 0.1)',
                 border: '1px solid rgba(252, 255, 244, 0.2)',
@@ -242,22 +278,22 @@ function Characters() {
                   src={character.image} 
                   alt={character.name} 
                   style={styles.characterImage}
-                  whileHover={{ 
+                  whileHover={prefersReducedMotion ? {} : { 
                     scale: 1.05,
                     borderColor: '#713c4e',
                     boxShadow: '0 0 20px rgba(252, 255, 244, 0.3)',
-                    transition: { duration: 0.3 }
                   }}
+                  loading="lazy"
                 />
                 <motion.div 
                   style={styles.iconBadge}
-                  whileHover={{
+                  whileHover={prefersReducedMotion ? {} : {
                     backgroundColor: '#713c4e',
                   }}
                 >
                   <motion.div
                     style={styles.icon}
-                    whileHover={{
+                    whileHover={prefersReducedMotion ? {} : {
                       color: '#28265a',
                     }}
                   >
@@ -272,7 +308,7 @@ function Characters() {
               
               <motion.div 
                 style={styles.quoteContainer}
-                whileHover={{
+                whileHover={prefersReducedMotion ? {} : {
                   backgroundColor: 'rgba(252, 255, 244, 0.05)',
                 }}
               >

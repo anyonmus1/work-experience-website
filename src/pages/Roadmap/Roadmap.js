@@ -1,12 +1,12 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { Rocket, Target, Users, Leaf, Code, Bell, Zap, Globe } from 'lucide-react';
 
 const roadmapData = [
   {
     phase: "Phase 1: Seeding the Fields",
     timeline: "Q4 2024 - Q1 2025",
-    icon: <Rocket size={24} color="#713c4e" />, // Updated to red
+    icon: <Rocket size={24} color="#713c4e" />,
     items: [
       "Launch of CWB token on Ethereum mainnet",
       "Initial exchange listings and liquidity provision",
@@ -65,40 +65,51 @@ const roadmapData = [
   }
 ];
 
-
 function Roadmap() {
+  // Hook to detect if user prefers reduced motion
+  const prefersReducedMotion = useReducedMotion();
+
   const styles = {
     roadmap: {
       paddingTop: '80px',
-      backgroundColor: '#93b3d8', // Light blue
+      backgroundColor: '#93b3d8',
       color: '#ffffff',
       minHeight: '100vh',
+      overflowX: 'hidden', // Prevent horizontal scroll on mobile
     },
     hero: {
       textAlign: 'center',
-      padding: '4rem 2rem',
-      background: 'linear-gradient(rgba(11, 23, 27, 0.8), rgba(40, 38, 90, 0.8))', // Dark blue to deep purple
+      padding: '4rem 1rem',
+      background: 'linear-gradient(rgba(11, 23, 27, 0.8), rgba(40, 38, 90, 0.8))',
       backgroundPosition: 'center',
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
+      '@media (min-width: 768px)': {
+        padding: '4rem 2rem',
+      },
     },
     heroTitle: {
-      fontSize: 'clamp(2.5rem, 5vw, 4rem)',
+      fontSize: 'clamp(2rem, 5vw, 4rem)',
       marginBottom: '1.5rem',
-      color: '#efcea1', // Warm beige
+      color: '#efcea1',
+      wordBreak: 'break-word',
     },
     heroText: {
-      fontSize: 'clamp(1.1rem, 2vw, 1.3rem)',
+      fontSize: 'clamp(1rem, 2vw, 1.3rem)',
       marginBottom: '2rem',
       maxWidth: '800px',
       margin: '0 auto',
       lineHeight: '1.6',
       color: '#ffffff',
+      padding: '0 1rem',
     },
     content: {
-      padding: '4rem 2rem',
-      backgroundColor: '#0b171b', // Dark blue-black
+      padding: '2rem 1rem',
+      backgroundColor: '#0b171b',
       position: 'relative',
+      '@media (min-width: 768px)': {
+        padding: '4rem 2rem',
+      },
     },
     timeline: {
       maxWidth: '1200px',
@@ -108,35 +119,37 @@ function Roadmap() {
     },
     timelineConnector: {
       position: 'absolute',
-      left: '50%',
-      transform: 'translateX(-50%)',
+      left: '20px',
       width: '4px',
       height: '100%',
-      backgroundColor: '#713c4e', // Red
+      backgroundColor: '#713c4e',
       opacity: 0.3,
-      '@media (max-width: 768px)': {
-        left: '20px',
+      '@media (min-width: 768px)': {
+        left: '50%',
+        transform: 'translateX(-50%)',
       },
     },
     phase: {
       display: 'flex',
+      flexDirection: 'column',
       marginBottom: '4rem',
       position: 'relative',
-      '@media (max-width: 768px)': {
-        flexDirection: 'column',
+      '@media (min-width: 768px)': {
+        flexDirection: 'row',
       },
     },
     phaseContent: {
       flex: '1',
-      backgroundColor: 'rgba(147, 179, 216, 0.1)', // Light blue with opacity
+      backgroundColor: 'rgba(147, 179, 216, 0.1)',
       borderRadius: '15px',
-      padding: '2rem',
-      margin: '0 2rem',
+      padding: '1.5rem',
+      margin: '1rem 0 1rem 3rem',
       border: '1px solid rgba(255,255,255,0.1)',
       position: 'relative',
       transition: 'all 0.3s ease',
-      '@media (max-width: 768px)': {
-        margin: '1rem 0 1rem 3rem',
+      '@media (min-width: 768px)': {
+        padding: '2rem',
+        margin: '0 2rem',
       },
     },
     phaseHeader: {
@@ -146,30 +159,31 @@ function Roadmap() {
       gap: '1rem',
     },
     phaseTitle: {
-      color: '#efcea1', // Warm beige
+      color: '#efcea1',
       fontSize: 'clamp(1.2rem, 3vw, 1.5rem)',
       marginBottom: '0.5rem',
+      wordBreak: 'break-word',
     },
     phaseTimeline: {
-      color: '#a7af75', // Sage green
+      color: '#a7af75',
       fontSize: '1rem',
       fontWeight: 'bold',
     },
     phaseIcon: {
-      backgroundColor: '#28265a', // Deep purple
+      backgroundColor: '#28265a',
       padding: '1rem',
       borderRadius: '50%',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
       position: 'absolute',
-      left: '50%',
-      transform: 'translateX(-50%)',
+      left: '0',
       zIndex: 2,
-      border: '2px solid #713c4e', // Red border
+      border: '2px solid #713c4e',
       transition: 'all 0.3s ease',
-      '@media (max-width: 768px)': {
-        left: '0',
+      '@media (min-width: 768px)': {
+        left: '50%',
+        transform: 'translateX(-50%)',
       },
     },
     itemsList: {
@@ -181,7 +195,8 @@ function Roadmap() {
       marginBottom: '1rem',
       paddingLeft: '1.5rem',
       position: 'relative',
-      color: '#93b3d8', // Light blue
+      color: '#93b3d8',
+      fontSize: 'clamp(0.9rem, 2vw, 1rem)',
       '&:before': {
         content: '"🐮"',
         position: 'absolute',
@@ -191,14 +206,36 @@ function Roadmap() {
     },
     disclaimer: {
       textAlign: 'center',
-      padding: '2rem',
-      fontSize: '0.9rem',
+      padding: '2rem 1rem',
+      fontSize: 'clamp(0.8rem, 2vw, 0.9rem)',
       opacity: 0.8,
       maxWidth: '800px',
       margin: '0 auto',
-      color: '#a7af75', // Sage green
+      color: '#a7af75',
     },
   };
+
+  // Optimized animation variants for mobile
+  const fadeInVariants = {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.4 }
+  };
+
+  const phaseVariants = (index) => ({
+    initial: { 
+      opacity: 0, 
+      x: window.innerWidth < 768 ? -20 : (index % 2 === 0 ? -50 : 50) 
+    },
+    animate: { 
+      opacity: 1, 
+      x: 0 
+    },
+    transition: { 
+      duration: prefersReducedMotion ? 0 : 0.4,
+      delay: index * 0.1
+    }
+  });
 
   return (
     <div style={styles.roadmap}>
@@ -206,21 +243,18 @@ function Roadmap() {
         style={styles.hero}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
+        transition={{ duration: prefersReducedMotion ? 0 : 0.6 }}
       >
         <motion.h1 
           style={styles.heroTitle}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          {...fadeInVariants}
         >
           Our Roadmap
         </motion.h1>
         <motion.p 
           style={styles.heroText}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          {...fadeInVariants}
+          transition={{ delay: 0.2 }}
         >
           Follow the May-Bellets Militia's journey as we cultivate a revolutionary 
           ecosystem in the crypto pastures. Our detailed roadmap outlines the key 
@@ -235,27 +269,29 @@ function Roadmap() {
             <motion.div
               key={index}
               style={styles.phase}
-              initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
+              variants={phaseVariants(index)}
+              initial="initial"
+              whileInView="animate"
+              viewport={{ once: true, margin: "-50px" }}
             >
               <motion.div 
                 style={styles.phaseIcon}
-                whileHover={{
-                  backgroundColor: '#713c4e', // Red
-                  transform: 'translateX(-50%) scale(1.1)',
-                  boxShadow: '0 0 20px rgba(252, 255, 244, 0.3)', // Red glow
+                whileHover={prefersReducedMotion ? {} : {
+                  backgroundColor: '#713c4e',
+                  transform: window.innerWidth < 768 ? 
+                    'scale(1.1)' : 
+                    'translateX(-50%) scale(1.1)',
+                  boxShadow: '0 0 20px rgba(252, 255, 244, 0.3)',
                 }}
               >
                 {phase.icon}
               </motion.div>
               <motion.div 
                 style={styles.phaseContent}
-                whileHover={{ 
+                whileHover={prefersReducedMotion ? {} : {
                   scale: 1.02,
-                  boxShadow: '0 10px 30px rgba(252, 255, 244, 0.1)', // Red glow
-                  border: '1px solid rgba(252, 255, 244, 0.2)', // Red border
+                  boxShadow: '0 10px 30px rgba(252, 255, 244, 0.1)',
+                  border: '1px solid rgba(252, 255, 244, 0.2)',
                 }}
               >
                 <div style={styles.phaseHeader}>
@@ -272,7 +308,10 @@ function Roadmap() {
                       initial={{ opacity: 0, x: 20 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
-                      transition={{ delay: (index * 0.2) + (itemIndex * 0.1) }}
+                      transition={{ 
+                        delay: prefersReducedMotion ? 0 : (index * 0.1) + (itemIndex * 0.05),
+                        duration: 0.3
+                      }}
                     >
                       {item}
                     </motion.li>

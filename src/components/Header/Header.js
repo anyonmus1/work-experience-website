@@ -1,14 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
 function Header() {
+  const prefersReducedMotion = useReducedMotion();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [isMobile, setIsMobile] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const lastScrollY = useRef(0);
   const touchStartY = useRef(0);
+  const scrollTimeout = useRef(null);
 
   useEffect(() => {
     const handleResize = () => {
@@ -17,23 +19,22 @@ function Header() {
     };
 
     const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      
-      if (currentScrollY < 20) {
-        setIsVisible(true);
-        setScrolled(false);
-        return;
-      }
+      if (scrollTimeout.current) return;
 
-      setScrolled(true);
-      
-      if (currentScrollY < lastScrollY.current) {
-        setIsVisible(true);
-      } else if (currentScrollY > lastScrollY.current) {
-        setIsVisible(false);
-      }
+      scrollTimeout.current = setTimeout(() => {
+        const currentScrollY = window.scrollY;
+        
+        if (currentScrollY < 20) {
+          setIsVisible(true);
+          setScrolled(false);
+        } else {
+          setScrolled(true);
+          setIsVisible(currentScrollY < lastScrollY.current);
+        }
 
-      lastScrollY.current = currentScrollY;
+        lastScrollY.current = currentScrollY;
+        scrollTimeout.current = null;
+      }, 100);
     };
 
     const handleTouchStart = (e) => {
@@ -41,33 +42,31 @@ function Header() {
     };
 
     const handleTouchMove = (e) => {
-      const touchY = e.touches[0].clientY;
-      const touchDiff = touchY - touchStartY.current;
-
-      if (touchDiff > 50) {
-        setIsVisible(true);
-      } else if (touchDiff < -50) {
-        setIsVisible(false);
+      const touchDiff = e.touches[0].clientY - touchStartY.current;
+      if (Math.abs(touchDiff) > 50) {
+        setIsVisible(touchDiff > 0);
       }
     };
 
+    handleResize();
     window.addEventListener('resize', handleResize);
-    window.addEventListener('scroll', handleScroll);
-    window.addEventListener('touchstart', handleTouchStart);
-    window.addEventListener('touchmove', handleTouchMove);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('touchstart', handleTouchStart, { passive: true });
+    window.addEventListener('touchmove', handleTouchMove, { passive: true });
 
     return () => {
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('touchstart', handleTouchStart);
       window.removeEventListener('touchmove', handleTouchMove);
+      if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
     };
   }, []);
 
   const styles = {
     header: {
       backgroundColor: scrolled ? '#0b171b' : 'rgba(11, 23, 27, 0.95)',
-      padding: '1rem',
+      padding: isMobile ? '0.75rem' : '1rem',
       position: 'fixed',
       width: '100%',
       top: 0,
@@ -86,20 +85,24 @@ function Header() {
       padding: '0 1rem',
     },
     logo: {
-      height: '60px',
+      height: isMobile ? '50px' : '60px',
       width: 'auto',
       cursor: 'pointer',
       transition: 'transform 0.3s ease',
     },
     nav: {
-      display: isMobile && !isMenuOpen ? 'none' : 'block',
-      position: isMobile ? 'absolute' : 'static',
-      top: isMobile ? '100%' : 'auto',
-      left: isMobile ? 0 : 'auto',
+      display: isMobile && !isMenuOpen ? 'none' : 'flex',
+      position: isMobile ? 'fixed' : 'static',
+      top: isMobile ? '73px' : 'auto',
+      left: 0,
+      right: 0,
       width: isMobile ? '100%' : 'auto',
       backgroundColor: isMobile ? '#0b171b' : 'transparent',
       padding: isMobile ? '1rem' : 0,
       boxShadow: isMobile ? '0 4px 6px rgba(40, 38, 90, 0.2)' : 'none',
+      maxHeight: isMobile ? 'calc(100vh - 73px)' : 'none',
+      overflowY: isMobile ? 'auto' : 'visible',
+      justifyContent: 'flex-end',
     },
     navList: {
       listStyle: 'none',
@@ -108,12 +111,17 @@ function Header() {
       display: 'flex',
       flexDirection: isMobile ? 'column' : 'row',
       alignItems: isMobile ? 'flex-start' : 'center',
+      width: isMobile ? '100%' : 'auto',
     },
     navItem: {
-      margin: isMobile ? '0.5rem 0' : '0 1rem',
+      margin: isMobile ? '0.5rem 1rem' : '0 1rem',
+      width: isMobile ? '100%' : 'auto',
+      textAlign: isMobile ? 'left' : 'right',
     },
     menuButton: {
-      display: isMobile ? 'block' : 'none',
+      display: isMobile ? 'flex' : 'none',
+      alignItems: 'center',
+      justifyContent: 'center',
       background: 'none',
       border: 'none',
       color: '#93b3d8',
@@ -121,6 +129,19 @@ function Header() {
       cursor: 'pointer',
       padding: '0.5rem',
       zIndex: 1001,
+      width: '44px',
+      height: '44px',
+      touchAction: 'manipulation',
+    },
+    navLink: {
+      color: '#93b3d8',
+      textDecoration: 'none',
+      fontSize: '1rem',
+      padding: isMobile ? '0.75rem 0' : '0.5rem',
+      display: 'block',
+      whiteSpace: 'nowrap',
+      cursor: 'pointer',
+      transition: 'color 0.2s ease',
     },
   };
 
@@ -138,8 +159,8 @@ function Header() {
       opacity: 1,
       transition: {
         type: "spring",
-        stiffness: 300,
-        damping: 30
+        stiffness: prefersReducedMotion ? 300 : 200,
+        damping: prefersReducedMotion ? 30 : 25
       }
     },
     hidden: {
@@ -147,8 +168,8 @@ function Header() {
       opacity: 0,
       transition: {
         type: "spring",
-        stiffness: 300,
-        damping: 30
+        stiffness: prefersReducedMotion ? 300 : 200,
+        damping: prefersReducedMotion ? 30 : 25
       }
     }
   };
@@ -156,14 +177,18 @@ function Header() {
   const mobileMenuVariants = {
     hidden: { 
       opacity: 0,
-      y: -20,
+      y: -10,
       transition: { duration: 0.2 }
     },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.3 }
+      transition: { duration: 0.2 }
     }
+  };
+
+  const handleNavClick = () => {
+    setIsMenuOpen(false);
   };
 
   return (
@@ -177,13 +202,13 @@ function Header() {
           variants={headerVariants}
         >
           <div style={styles.headerContent}>
-            <Link to="/">
+            <Link to="/" onClick={handleNavClick}>
               <motion.img
                 src="/images/cowwifbellogo.png"
                 alt="CowWifBell Logo"
                 style={styles.logo}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={prefersReducedMotion ? {} : { scale: 1.1 }}
+                whileTap={prefersReducedMotion ? {} : { scale: 0.95 }}
               />
             </Link>
 
@@ -191,7 +216,8 @@ function Header() {
               style={styles.menuButton}
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               whileHover={{ color: '#efcea1' }}
-              whileTap={{ scale: 0.9 }}
+              whileTap={{ scale: 0.95 }}
+              aria-label="Toggle menu"
             >
               {isMenuOpen ? '✕' : '☰'}
             </motion.button>
@@ -205,46 +231,23 @@ function Header() {
               <ul style={styles.navList}>
                 {navItems.map((item) => (
                   <motion.li key={item.label} style={styles.navItem}>
-                    <motion.div
-                      style={{ display: 'inline-block' }}
-                      whileHover={{
-                        scale: isMobile ? 1 : 1.3,
-                        rotate: isMobile ? 0 : [0, -2, 2, -2, 2, 0],
-                        x: isMobile ? 10 : 0,
-                      }}
-                      transition={{
-                        scale: { duration: 0.2 },
-                        rotate: {
-                          repeat: Infinity,
-                          duration: 0.5,
-                          repeatType: "loop"
-                        }
-                      }}
+                    <Link
+                      to={item.path}
+                      style={styles.navLink}
+                      onClick={handleNavClick}
                     >
-                      <motion.span
-                        style={{
-                          color: '#93b3d8',
-                          textDecoration: 'none',
-                          fontSize: '1rem',
-                          padding: '0.5rem',
-                          display: 'inline-block',
-                          whiteSpace: 'nowrap',
-                          cursor: 'pointer'
+                      <motion.div
+                        whileHover={!isMobile && !prefersReducedMotion ? {
+                          scale: 1.1,
+                          color: '#efcea1',
+                        } : {
+                          color: '#efcea1',
                         }}
-                        whileHover={{ color: '#efcea1' }}
+                        transition={{ duration: 0.2 }}
                       >
-                        <Link
-                          to={item.path}
-                          style={{
-                            color: 'inherit',
-                            textDecoration: 'none'
-                          }}
-                          onClick={() => setIsMenuOpen(false)}
-                        >
-                          {item.label}
-                        </Link>
-                      </motion.span>
-                    </motion.div>
+                        {item.label}
+                      </motion.div>
+                    </Link>
                   </motion.li>
                 ))}
               </ul>
