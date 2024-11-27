@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
-import { Shield, Users, Rocket, ChartBar, Bell, Leaf, Target, Heart } from 'lucide-react';
+import { Shield, Users, ChartBar, Bell, Leaf, Target, Heart } from 'lucide-react';
 
 function Home() {
   // Hook to respect user's motion preferences
@@ -233,10 +233,6 @@ function Home() {
     transition: { duration: prefersReducedMotion ? 0 : 0.4 }
   };
 
-  const scaleHover = prefersReducedMotion ? {} : {
-    scale: 1.05,
-    transition: { duration: 0.2 }
-  };
 
   return (
     <div style={styles.home}>

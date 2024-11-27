@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
-import { Shield, Users, Target, Rocket, Bell, Heart, Code, Leaf, Star } from 'lucide-react';
+import { Shield, Users, Target, Heart, Code, Star } from 'lucide-react';
 
 function About() {
   const prefersReducedMotion = useReducedMotion();

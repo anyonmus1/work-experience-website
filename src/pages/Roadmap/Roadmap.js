@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
-import { Rocket, Target, Users, Leaf, Code, Bell, Zap, Globe } from 'lucide-react';
+import { Rocket, Leaf, Zap, Globe } from 'lucide-react';
 
 const roadmapData = [
   {

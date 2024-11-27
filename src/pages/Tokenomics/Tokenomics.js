@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { PieChart, LineChart, BarChart, Shield } from 'lucide-react';
+import { LineChart, BarChart, Shield } from 'lucide-react';
 import { PieChart as RechartsRotation, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from 'recharts';
 
 function Tokenomics() {
@@ -419,7 +419,7 @@ function Tokenomics() {
                     {[1, 2, 3, 4, 5].map((num) => (
                       <tr key={num}>
                         <td style={styles.tableCell}>Founder {num}</td>
-                        <td style={styles.tableCell}>10  Billion CWB</td>
+                        <td style={styles.tableCell}>10 Billion CWB</td>
                         <td style={styles.tableCell}>12-month cliff, 36-month linear vesting</td>
                       </tr>
                     ))}
