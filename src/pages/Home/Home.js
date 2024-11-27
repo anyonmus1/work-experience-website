@@ -9,7 +9,7 @@ function Home() {
   const styles = {
     home: {
       paddingTop: '80px',
-      backgroundColor: '#93b3d8',
+      backgroundColor: '#100c1c',
       color: '#28265a',
       minHeight: '100vh',
       overflow: 'hidden',
@@ -17,7 +17,7 @@ function Home() {
     hero: {
       textAlign: 'center',
       padding: '4rem 1rem',
-      background: 'linear-gradient(rgba(11, 23, 27, 0.8), rgba(40, 38, 90, 0.8))',
+      background: 'linear-gradient(rgba(0, 0, 0, 0), rgba(40, 38, 90, 0.8))',
       backgroundPosition: 'center',
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
@@ -29,12 +29,12 @@ function Home() {
     heroTitle: {
       fontSize: 'clamp(2rem, 5vw, 4rem)',
       marginBottom: '1.5rem',
-      color: '#efcea1',
+      color: '#ffe3b3',
       wordBreak: 'break-word',
     },
     heroSubtitle: {
       fontSize: 'clamp(1.2rem, 3vw, 2rem)',
-      color: '#a7af75',
+      color: '#c79884',
       marginBottom: '2rem',
       wordBreak: 'break-word',
     },
@@ -59,7 +59,7 @@ function Home() {
       alignItems: 'center',
       gap: '0.5rem',
       backgroundColor: '#713c4e',
-      color: '#0b171b',
+      color: '#100c1c',
       padding: '0.875rem 1.5rem',
       borderRadius: '50px',
       textDecoration: 'none',
@@ -84,7 +84,7 @@ function Home() {
       gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
       gap: '1.5rem',
       padding: '2rem 1rem',
-      backgroundColor: '#0b171b',
+      backgroundColor: '#100c1c',
       maxWidth: '1400px',
       margin: '0 auto',
       '@media (min-width: 768px)': {
@@ -125,7 +125,7 @@ function Home() {
       transition: 'color 0.3s ease',
     },
     featureTitle: {
-      color: '#efcea1',
+      color: '#ffe3b3',
       fontSize: 'clamp(1.2rem, 2.5vw, 1.5rem)',
       marginBottom: '1rem',
       fontWeight: 'bold',
@@ -173,7 +173,7 @@ function Home() {
     },
     manifestoSection: {
       padding: '2rem 1rem',
-      backgroundColor: '#0b171b',
+      backgroundColor: '#100c1c',
       textAlign: 'center',
       '@media (min-width: 768px)': {
         padding: '4rem 2rem',
@@ -185,7 +185,7 @@ function Home() {
     },
     manifestoQuote: {
       fontSize: 'clamp(1.1rem, 2.5vw, 1.8rem)',
-      color: '#a7af75',
+      color: '#c79884',
       fontStyle: 'italic',
       lineHeight: '1.6',
       marginBottom: '2rem',
@@ -287,7 +287,7 @@ function Home() {
             whileHover={prefersReducedMotion ? {} : { 
               scale: 1.05,
               backgroundColor: '#713c4e',
-              color: '#0b171b',
+              color: '#100c1c',
               border: '2px solid #713c4e',
             }}
             whileTap={prefersReducedMotion ? {} : { scale: 0.95 }}

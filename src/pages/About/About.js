@@ -8,14 +8,14 @@ function About() {
   const styles = {
     about: {
       paddingTop: '80px',
-      backgroundColor: '#93b3d8',
+      backgroundColor: '#100c1c',
       color: '#ffffff',
       overflowX: 'hidden',
     },
     hero: {
       textAlign: 'center',
       padding: '3rem 1rem',
-      background: 'linear-gradient(rgba(11, 23, 27, 0.8), rgba(40, 38, 90, 0.8))',
+      background: 'linear-gradient(rgba(0, 0, 0, 0), rgba(40, 38, 90, 0.8))',
       backgroundPosition: 'center',
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
@@ -26,7 +26,7 @@ function About() {
     heroTitle: {
       fontSize: 'clamp(2rem, 5vw, 4rem)',
       marginBottom: '1.5rem',
-      color: '#efcea1',
+      color: '#ffe3b3',
       wordBreak: 'break-word',
     },
     heroText: {
@@ -40,7 +40,7 @@ function About() {
     },
     content: {
       padding: '2rem 1rem',
-      backgroundColor: '#0b171b',
+      backgroundColor: '#000000',
       '@media (min-width: 768px)': {
         padding: '4rem 2rem',
       },
@@ -54,7 +54,7 @@ function About() {
     },
     sectionTitle: {
       fontSize: 'clamp(1.5rem, 3vw, 2.5rem)',
-      color: '#a7af75',
+      color: '#c79884',
       marginBottom: '2rem',
       textAlign: 'center',
       wordBreak: 'break-word',
@@ -67,13 +67,13 @@ function About() {
     },
     quote: {
       fontStyle: 'italic',
-      color: '#efcea1',
+      color: '#ffe3b3',
       fontSize: 'clamp(1.1rem, 2vw, 1.2rem)',
       textAlign: 'center',
       margin: '2rem 0',
       padding: '1.5rem',
       borderLeft: '4px solid #713c4e',
-      backgroundColor: 'rgba(252, 255, 244, 0.05)',
+      backgroundColor: 'rgba(147, 179, 216, 0.1)',
       '@media (min-width: 768px)': {
         padding: '2rem',
       },
@@ -116,7 +116,7 @@ function About() {
       transition: 'color 0.3s ease',
     },
     cardTitle: {
-      color: '#efcea1',
+      color: '#ffe3b3',
       fontSize: 'clamp(1.2rem, 2.5vw, 1.5rem)',
       marginBottom: '1rem',
       wordBreak: 'break-word',
@@ -136,16 +136,8 @@ function About() {
         margin: '3rem 0',
       },
     },
-    footer: {
-      textAlign: 'center',
-      padding: '2rem 1rem',
-      backgroundColor: 'rgba(40, 38, 90, 0.2)',
-      '@media (min-width: 768px)': {
-        padding: '4rem 2rem',
-      },
-    },
     roleText: {
-      color: '#713c4e',
+      color: '#c79884',
       fontWeight: 'bold',
       marginBottom: '0.5rem',
       fontSize: 'clamp(0.9rem, 2vw, 1rem)',
@@ -153,6 +145,14 @@ function About() {
     experienceText: {
       color: '#93b3d8',
       fontSize: 'clamp(0.9rem, 2vw, 1rem)',
+    },
+    footer: {
+      textAlign: 'center',
+      padding: '2rem 1rem',
+      backgroundColor: 'rgba(40, 38, 90, 0.2)',
+      '@media (min-width: 768px)': {
+        padding: '4rem 2rem',
+      },
     },
   };
 

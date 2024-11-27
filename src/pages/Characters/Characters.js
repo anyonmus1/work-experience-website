@@ -5,7 +5,7 @@ import { Badge, Shield, Code, Heart, Users } from 'lucide-react';
 const characters = [
   {
     name: "Field General May Bell",
-    image: "/images/Maybell .png",
+    image: "/images/Cow2.png",
     role: "Project Lead",
     description: "Our fearless leader, guiding the May-Bellets Militia through the wild frontiers of the meme coin landscape with wisdom, strategy, and an unwavering commitment to our mission.",
     icon: <Badge size={24} />,
@@ -51,7 +51,7 @@ function Characters() {
   const styles = {
     characters: {
       paddingTop: '80px',
-      backgroundColor: '#93b3d8',
+      backgroundColor: '#100c1c',
       color: '#ffffff',
       minHeight: '100vh',
       display: 'flex',
@@ -61,24 +61,24 @@ function Characters() {
     hero: {
       textAlign: 'center',
       padding: '3rem 1rem',
-      background: 'linear-gradient(rgba(11, 23, 27, 0.8), rgba(40, 38, 90, 0.8))',
+      background: 'linear-gradient(rgba(16, 12, 28, 0.8), rgba(113, 60, 78, 0.8))', // Restored gradient
       backgroundPosition: 'center',
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
       position: 'relative',
-      '@media (min-width: 768px)': {
-        padding: '6rem 2rem',
-      },
+    },
+    heroDesktop: {
+      padding: '6rem 2rem',
     },
     heroTitle: {
       fontSize: 'clamp(2rem, 5vw, 4rem)',
       marginBottom: '1.5rem',
-      color: '#efcea1',
+      color: '#ffe3b3', // Updated text color
       wordBreak: 'break-word',
     },
     heroSubtitle: {
       fontSize: 'clamp(1.1rem, 2.5vw, 1.8rem)',
-      color: '#a7af75',
+      color: '#c79884', // Updated text color
       marginBottom: '2rem',
       maxWidth: '800px',
       margin: '0 auto',
@@ -86,28 +86,28 @@ function Characters() {
     },
     content: {
       padding: '2rem 1rem',
-      backgroundColor: '#0b171b',
+      backgroundColor: 'rgba(113, 60, 78, 0.8)', // Restored red background
       flex: 1,
-      '@media (min-width: 768px)': {
-        padding: '4rem 2rem',
-      },
+    },
+    contentDesktop: {
+      padding: '4rem 2rem',
     },
     charactersGrid: {
       display: 'grid',
-      gridTemplateColumns: '1fr',
+      gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
       gap: '2rem',
       maxWidth: '1400px',
       margin: '0 auto',
-      '@media (min-width: 640px)': {
-        gridTemplateColumns: 'repeat(2, 1fr)',
-      },
-      '@media (min-width: 1024px)': {
-        gridTemplateColumns: 'repeat(3, 1fr)',
-        gap: '3rem',
-      },
+    },
+    charactersGridTablet: {
+      gridTemplateColumns: 'repeat(1, 1fr)',
+    },
+    charactersGridDesktop: {
+      gridTemplateColumns: 'repeat(1, 1fr)',
+      gap: '3rem',
     },
     characterCard: {
-      backgroundColor: 'rgba(147, 179, 216, 0.1)',
+      backgroundColor: 'rgba(16, 12, 28, 0.5)', // Kept original dark overlay
       borderRadius: '20px',
       padding: '1.5rem',
       textAlign: 'center',
@@ -118,28 +118,34 @@ function Characters() {
       position: 'relative',
       overflow: 'hidden',
       transition: 'all 0.3s ease',
-      '@media (min-width: 768px)': {
-        padding: '2rem',
-      },
+    },
+    characterCardDesktop: {
+      padding: '2rem',
     },
     characterImageContainer: {
       position: 'relative',
       marginBottom: '1.5rem',
-      width: '160px',
-      height: '160px',
-      '@media (min-width: 768px)': {
-        width: '180px',
-        height: '180px',
-      },
+      width: '640px',
+      height: '640px',
+    },
+    characterImageContainerDesktop: {
+      width: '360px',
+      height: '360px',
     },
     characterImage: {
       width: '100%',
       height: '100%',
       objectFit: 'cover',
       borderRadius: '50%',
-      border: '4px solid #713c4e',
-      backgroundColor: '#0b171b',
+      border: '4px solid #713c4e', // Updated from rgba
+      backgroundColor: '#713c4e', // Updated from rgba
       transition: 'all 0.3s ease',
+      imageRendering: 'auto',
+      WebkitBackfaceVisibility: 'hidden',
+      MozBackfaceVisibility: 'hidden',
+      backfaceVisibility: 'hidden',
+      transform: 'translateZ(0)',
+      WebkitTransform: 'translateZ(0)',
     },
     iconBadge: {
       position: 'absolute',
@@ -148,7 +154,7 @@ function Characters() {
       backgroundColor: '#28265a',
       padding: '0.5rem',
       borderRadius: '50%',
-      border: '2px solid #713c4e',
+      border: '2px solid #713c4e', // Updated from rgba
       display: 'inline-flex',
       alignItems: 'center',
       justifyContent: 'center',
@@ -156,31 +162,35 @@ function Characters() {
       zIndex: 1,
     },
     icon: {
-      color: '#713c4e',
+      color: '#713c4e', // Updated from rgba
+      transition: 'color 0.3s ease',
+    },
+    icon: {
+      color: 'rgba(113, 60, 78, 0.8)',
       transition: 'color 0.3s ease',
     },
     characterName: {
       fontSize: 'clamp(1.5rem, 3vw, 1.8rem)',
-      color: '#efcea1',
+      color: '#ffe3b3', // Updated text color
       marginBottom: '0.5rem',
       wordBreak: 'break-word',
     },
     characterRole: {
-      fontSize: 'clamp(1rem, 2vw, 1.1rem)',
-      color: '#713c4e',
+      fontSize: 'clamp(1.8rem, 2vw, 1.1rem)',
+      color: '#c79884', // Updated text color
       marginBottom: '1.5rem',
       fontStyle: 'italic',
     },
     characterDescription: {
       fontSize: 'clamp(0.9rem, 2vw, 1rem)',
-      color: '#93b3d8',
+      color: '#93b3d8', // Updated text color
       lineHeight: '1.6',
       marginBottom: '1.5rem',
     },
     quoteContainer: {
       marginTop: 'auto',
       padding: '1rem',
-      backgroundColor: 'rgba(40, 38, 90, 0.3)',
+      backgroundColor: 'rgba(147, 179, 216, 0.1)', // Updated to match other cards
       borderRadius: '10px',
       position: 'relative',
       transition: 'all 0.3s ease',
@@ -188,17 +198,17 @@ function Characters() {
     quote: {
       fontSize: 'clamp(0.9rem, 2vw, 0.95rem)',
       fontStyle: 'italic',
-      color: '#a7af75',
+      color: '#c79884', // Updated text color
       lineHeight: '1.4',
     },
     quoteMark: {
       position: 'absolute',
       fontSize: '2rem',
       opacity: 0.2,
-      color: '#713c4e',
-      '@media (min-width: 768px)': {
-        fontSize: '3rem',
-      },
+      color: '#713c4e', // Updated from rgba(113, 60, 78, 0.8)
+    },
+    quoteMarkDesktop: {
+      fontSize: '3rem',
     },
     quoteMarkLeft: {
       top: '-10px',
@@ -210,7 +220,6 @@ function Characters() {
     },
   };
 
-  // Optimized animation variants
   const fadeInUp = {
     initial: { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0 },
@@ -226,10 +235,17 @@ function Characters() {
     }
   };
 
+  // Use window.matchMedia to handle responsive styles
+  const isDesktop = window.matchMedia('(min-width: 768px)').matches;
+  const isTablet = window.matchMedia('(min-width: 640px)').matches;
+
   return (
     <div style={styles.characters}>
       <motion.div 
-        style={styles.hero}
+        style={{
+          ...styles.hero,
+          ...(isDesktop && styles.heroDesktop),
+        }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: prefersReducedMotion ? 0 : 0.6 }}
@@ -249,9 +265,16 @@ function Characters() {
         </motion.p>
       </motion.div>
       
-      <div style={styles.content}>
+      <div style={{
+        ...styles.content,
+        ...(isDesktop && styles.contentDesktop),
+      }}>
         <motion.div 
-          style={styles.charactersGrid}
+          style={{
+            ...styles.charactersGrid,
+            ...(isTablet && styles.charactersGridTablet),
+            ...(isDesktop && styles.charactersGridDesktop),
+          }}
           initial="hidden"
           animate="visible"
           variants={{
@@ -265,7 +288,10 @@ function Characters() {
           {characters.map((character, index) => (
             <motion.div
               key={index}
-              style={styles.characterCard}
+              style={{
+                ...styles.characterCard,
+                ...(isDesktop && styles.characterCardDesktop),
+              }}
               variants={cardVariants}
               whileHover={prefersReducedMotion ? {} : { 
                 y: -10,
@@ -273,14 +299,17 @@ function Characters() {
                 border: '1px solid rgba(252, 255, 244, 0.2)',
               }}
             >
-              <div style={styles.characterImageContainer}>
+              <div style={{
+                ...styles.characterImageContainer,
+                ...(isDesktop && styles.characterImageContainerDesktop),
+              }}>
                 <motion.img 
                   src={character.image} 
                   alt={character.name} 
                   style={styles.characterImage}
                   whileHover={prefersReducedMotion ? {} : { 
                     scale: 1.05,
-                    borderColor: '#713c4e',
+                    borderColor: 'rgba(113, 60, 78, 0.8)',
                     boxShadow: '0 0 20px rgba(252, 255, 244, 0.3)',
                   }}
                   loading="lazy"
@@ -288,7 +317,7 @@ function Characters() {
                 <motion.div 
                   style={styles.iconBadge}
                   whileHover={prefersReducedMotion ? {} : {
-                    backgroundColor: '#713c4e',
+                    backgroundColor: 'rgba(113, 60, 78, 0.8)',
                   }}
                 >
                   <motion.div
@@ -312,9 +341,17 @@ function Characters() {
                   backgroundColor: 'rgba(252, 255, 244, 0.05)',
                 }}
               >
-                <span style={{...styles.quoteMark, ...styles.quoteMarkLeft}}>"</span>
+                <span style={{
+                  ...styles.quoteMark,
+                  ...styles.quoteMarkLeft,
+                  ...(isDesktop && styles.quoteMarkDesktop),
+                }}>"</span>
                 <p style={styles.quote}>{character.quote}</p>
-                <span style={{...styles.quoteMark, ...styles.quoteMarkRight}}>"</span>
+                <span style={{
+                  ...styles.quoteMark,
+                  ...styles.quoteMarkRight,
+                  ...(isDesktop && styles.quoteMarkDesktop),
+                }}>"</span>
               </motion.div>
             </motion.div>
           ))}

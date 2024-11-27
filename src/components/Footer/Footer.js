@@ -3,10 +3,10 @@ import React from 'react';
 function Footer() {
   const styles = {
     footer: {
-      backgroundColor: '#0b171b', // Dark blue-black
-      color: '#ffffff',
+      backgroundColor: '#111128', // Keeping original background
+      color: '#93b3d8', // Updated from white to match body text color
       padding: '3rem 0',
-      borderTop: '1px solid #28265a', // Deep purple
+      borderTop: '1px solid #000000', // Keeping original border
     },
     footerContent: {
       maxWidth: '1200px',
@@ -23,19 +23,19 @@ function Footer() {
       marginBottom: '2rem',
     },
     sectionTitle: {
-      color: '#efcea1', // Warm beige
+      color: '#ffe3b3', // Updated from efcea1
       fontSize: '1.2rem',
       marginBottom: '1rem',
       fontWeight: 'bold',
     },
     link: {
-      color: '#93b3d8', // Light blue
+      color: '#93b3d8', // Already matches
       textDecoration: 'none',
       display: 'block',
       marginBottom: '0.5rem',
       transition: 'color 0.3s ease, transform 0.2s ease',
       '&:hover': {
-        color: '#efcea1', // Warm beige
+        color: '#c79884', // Updated hover from efcea1
         transform: 'translateX(5px)',
       },
     },
@@ -47,10 +47,10 @@ function Footer() {
     socialIcon: {
       width: '24px',
       height: '24px',
-      fill: '#93b3d8', // Light blue
+      fill: '#93b3d8', // Already matches
       transition: 'fill 0.3s ease, transform 0.3s ease',
       '&:hover': {
-        fill: '#efcea1', // Warm beige
+        fill: '#c79884', // Updated hover from efcea1
         transform: 'translateY(-3px)',
       },
     },
@@ -58,9 +58,9 @@ function Footer() {
       textAlign: 'center',
       marginTop: '2rem',
       paddingTop: '2rem',
-      borderTop: '1px solid #28265a', // Deep purple
+      borderTop: '1px solid #000000', // Keeping original border
       fontSize: '0.9rem',
-      color: '#a7af75', // Sage green
+      color: '#c79884', // Updated from a7af75
     },
   };
 

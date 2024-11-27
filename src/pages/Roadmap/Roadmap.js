@@ -71,7 +71,7 @@ function Roadmap() {
   const styles = {
     roadmap: {
       paddingTop: '80px',
-      backgroundColor: '#93b3d8',
+      backgroundColor: '#100c1c',
       color: '#ffffff',
       minHeight: '100vh',
       overflowX: 'hidden',
@@ -79,7 +79,7 @@ function Roadmap() {
     hero: {
       textAlign: 'center',
       padding: '4rem 1rem',
-      background: 'linear-gradient(rgba(11, 23, 27, 0.8), rgba(40, 38, 90, 0.8))',
+      background: 'linear-gradient(rgba(0, 0, 0, 0), rgba(40, 38, 90, 0.8))',
       backgroundPosition: 'center',
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
@@ -90,7 +90,7 @@ function Roadmap() {
     heroTitle: {
       fontSize: 'clamp(2rem, 5vw, 4rem)',
       marginBottom: '1.5rem',
-      color: '#efcea1',
+      color: '#ffe3b3',
       wordBreak: 'break-word',
     },
     heroText: {
@@ -104,7 +104,7 @@ function Roadmap() {
     },
     content: {
       padding: '2rem 1rem',
-      backgroundColor: '#0b171b',
+      backgroundColor: '#100c1c',
       position: 'relative',
       '@media (min-width: 768px)': {
         padding: '4rem 2rem',
@@ -158,13 +158,13 @@ function Roadmap() {
       gap: '1rem',
     },
     phaseTitle: {
-      color: '#efcea1',
+      color: '#ffe3b3',
       fontSize: 'clamp(1.2rem, 3vw, 1.5rem)',
       marginBottom: '0.5rem',
       wordBreak: 'break-word',
     },
     phaseTimeline: {
-      color: '#a7af75',
+      color: '#c79884',
       fontSize: '1rem',
       fontWeight: 'bold',
     },
@@ -210,7 +210,7 @@ function Roadmap() {
       opacity: 0.8,
       maxWidth: '800px',
       margin: '0 auto',
-      color: '#a7af75',
+      color: '#c79884',
     },
   };
 

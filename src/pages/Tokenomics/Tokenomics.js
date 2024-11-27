@@ -7,14 +7,14 @@ function Tokenomics() {
   const styles = {
     tokenomics: {
       paddingTop: '80px',
-      backgroundColor: '#93b3d8',
+      backgroundColor: '#100c1c',
       color: '#ffffff',
       minHeight: '100vh',
     },
     hero: {
       textAlign: 'center',
       padding: '4rem 2rem',
-      background: 'linear-gradient(rgba(11, 23, 27, 0.8), rgba(40, 38, 90, 0.8))',
+      background: 'linear-gradient(rgba(0, 0, 0, 0), rgba(40, 38, 90, 0.8))',
       backgroundPosition: 'center',
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
@@ -22,7 +22,7 @@ function Tokenomics() {
     heroTitle: {
       fontSize: 'clamp(2rem, 4vw, 4rem)',
       marginBottom: '1.5rem',
-      color: '#efcea1',
+      color: '#ffe3b3',
       wordBreak: 'break-word',
     },
     heroText: {
@@ -36,7 +36,7 @@ function Tokenomics() {
     },
     content: {
       padding: '2rem 1rem',
-      backgroundColor: '#0b171b',
+      backgroundColor: '#100c1c',
       '@media (min-width: 768px)': {
         padding: '4rem 2rem',
       },
@@ -50,7 +50,7 @@ function Tokenomics() {
     },
     sectionTitle: {
       fontSize: 'clamp(1.5rem, 2.5vw, 2.5rem)',
-      color: '#a7af75',
+      color: '#c79884',
       marginBottom: '2rem',
       textAlign: 'center',
     },
@@ -78,7 +78,7 @@ function Tokenomics() {
       },
     },
     cardTitle: {
-      color: '#efcea1',
+      color: '#ffe3b3',
       fontSize: 'clamp(1.2rem, 2vw, 1.5rem)',
       marginBottom: '1rem',
     },
@@ -110,7 +110,7 @@ function Tokenomics() {
       backgroundColor: 'rgba(40, 38, 90, 0.3)',
       padding: '1rem',
       textAlign: 'left',
-      color: '#efcea1',
+      color: '#ffe3b3',
       whiteSpace: 'nowrap',
     },
     tableCell: {
@@ -148,16 +148,16 @@ function Tokenomics() {
       alignItems: 'center',
       justifyContent: 'center',
       transition: 'all 0.3s ease',
-      width: '56px', // Added fixed width
-      height: '56px', // Added fixed height
+      width: '56px',
+      height: '56px',
       marginBottom: '1rem',
     },
     icon: {
       color: '#713c4e',
       transition: 'color 0.3s ease',
-      display: 'flex', // Added display flex
-      alignItems: 'center', // Added align items
-      justifyContent: 'center', // Added justify content
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
     },
   };
   const distributionData = [
