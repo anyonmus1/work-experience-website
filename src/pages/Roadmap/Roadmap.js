@@ -74,7 +74,7 @@ function Roadmap() {
       backgroundColor: '#93b3d8',
       color: '#ffffff',
       minHeight: '100vh',
-      overflowX: 'hidden', // Prevent horizontal scroll on mobile
+      overflowX: 'hidden',
     },
     hero: {
       textAlign: 'center',
@@ -274,12 +274,19 @@ function Roadmap() {
             >
               <motion.div 
                 style={styles.phaseIcon}
-                whileHover={prefersReducedMotion ? {} : {
+                initial={false}
+                animate={{
+                  backgroundColor: '#28265a',
+                  scale: 1,
+                  boxShadow: '0 0 0 rgba(252, 255, 244, 0)',
+                }}
+                whileHover={{
                   backgroundColor: '#713c4e',
-                  transform: window.innerWidth < 768 ? 
-                    'scale(1.1)' : 
-                    'translateX(-50%) scale(1.1)',
+                  scale: 1.1,
                   boxShadow: '0 0 20px rgba(252, 255, 244, 0.3)',
+                }}
+                transition={{
+                  duration: 0.3,
                 }}
               >
                 {phase.icon}
