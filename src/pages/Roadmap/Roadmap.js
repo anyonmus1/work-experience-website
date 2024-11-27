@@ -6,7 +6,7 @@ const roadmapData = [
   {
     phase: "Phase 1: Seeding the Fields",
     timeline: "Q4 2024 - Q1 2025",
-    icon: <Rocket size={24} color="#713c4e" />,
+    icon: <Rocket size={24} strokeWidth={1.5} color="#713c4e" />,
     items: [
       "Launch of CWB token on Ethereum mainnet",
       "Initial exchange listings and liquidity provision",
@@ -21,7 +21,7 @@ const roadmapData = [
   {
     phase: "Phase 2: Nurturing Growth",
     timeline: "Q2 2025 - Q3 2025",
-    icon: <Leaf size={24} color="#713c4e" />,
+    icon: <Leaf size={24} strokeWidth={1.5} color="#713c4e" />,
     items: [
       "Launch of the May-Bellets Militia meme creation platform",
       "Implementation of staking and yield farming features",
@@ -36,7 +36,7 @@ const roadmapData = [
   {
     phase: "Phase 3: Expanding the Pastures",
     timeline: "Q4 2025 - Q2 2026",
-    icon: <Globe size={24} color="#713c4e" />,
+    icon: <Globe size={24} strokeWidth={1.5} color="#713c4e" />,
     items: [
       "Integration with Binance Smart Chain for cross-chain functionality",
       "Launch of NFT marketplace for meme trading",
@@ -51,7 +51,7 @@ const roadmapData = [
   {
     phase: "Phase 4: Harvesting Innovation",
     timeline: "Q3 2026 - Q4 2026",
-    icon: <Zap size={24} color="#713c4e" />,
+    icon: <Zap size={24} strokeWidth={1.5} color="#713c4e" />,
     items: [
       "Launch of May-Bellets DeFi suite",
       "Implementation of layer 2 scaling solution",
@@ -66,7 +66,6 @@ const roadmapData = [
 ];
 
 function Roadmap() {
-  // Hook to detect if user prefers reduced motion
   const prefersReducedMotion = useReducedMotion();
 
   const styles = {
@@ -215,7 +214,6 @@ function Roadmap() {
     },
   };
 
-  // Optimized animation variants for mobile
   const fadeInVariants = {
     initial: { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0 },
