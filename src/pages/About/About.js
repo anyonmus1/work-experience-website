@@ -40,7 +40,7 @@ function About() {
     },
     content: {
       padding: '2rem 1rem',
-      backgroundColor: '#000000',
+      backgroundColor: '#100c1c',
       '@media (min-width: 768px)': {
         padding: '4rem 2rem',
       },
