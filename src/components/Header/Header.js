@@ -68,7 +68,8 @@ function Header() {
     { label: 'About', path: '/about' },
     { label: 'The Militia', path: '/militia' },
     { label: 'Roadmap', path: '/roadmap' },
-    { label: 'Tokenomics', path: '/tokenomics' }
+    { label: 'Tokenomics', path: '/tokenomics' },
+    { label: 'Connect', path: '/connect' }
   ];
 
   const headerVariants = {
