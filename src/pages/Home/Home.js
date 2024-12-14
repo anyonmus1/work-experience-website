@@ -267,7 +267,7 @@ function Home() {
           {...fadeInUp}
         >
           <motion.a
-            href="/about"
+            href="/connect"
             style={styles.ctaButton}
             whileHover={prefersReducedMotion ? {} : { 
               scale: 1.05,
