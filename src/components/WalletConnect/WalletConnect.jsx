@@ -1,16 +1,85 @@
 import React, { useState, useEffect } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
-import Web3Modal from 'web3modal';
-import Web3 from 'web3';
-import WalletConnectProvider from "@walletconnect/web3-provider";
+import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum';
+import { Web3Modal, useWeb3Modal } from '@web3modal/react';
+import { configureChains, createConfig, WagmiConfig, useAccount, useConnect, useDisconnect, useNetwork, useSwitchNetwork } from 'wagmi';
+import { optimism } from 'wagmi/chains';
 import { Wallet, ExternalLink, Check, AlertCircle } from 'lucide-react';
 
-const WalletConnect = () => {
-  const [web3, setWeb3] = useState(null);
-  const [account, setAccount] = useState('');
-  const [isConnected, setIsConnected] = useState(false);
+
+const projectId = 'fd5220888cc12eb79beb00ce1b866589';
+
+
+// Configure chains and providers
+const { chains, publicClient } = configureChains(
+  [optimism],
+  [w3mProvider({ projectId })]
+);
+
+const wagmiConfig = createConfig({
+  autoConnect: true,
+  connectors: w3mConnectors({ 
+    projectId, 
+    chains,
+    version: 2
+  }),
+  publicClient
+});
+
+const ethereumClient = new EthereumClient(wagmiConfig, chains);
+
+const WalletConnectButton = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const prefersReducedMotion = useReducedMotion();
+  const { open } = useWeb3Modal();
+
+  // Wagmi hooks
+  const { address, isConnected } = useAccount();
+  const { isLoading } = useConnect({
+    onSuccess: () => {
+      console.log('Connection successful');
+      setErrorMessage('');
+    },
+    onError: (error) => {
+      console.error('Connection error:', error);
+      setErrorMessage(`Connection failed: ${error.message}`);
+    }
+  });
+  const { disconnect } = useDisconnect();
+  const { chain } = useNetwork();
+  const { switchNetwork } = useSwitchNetwork();
+
+  // Network switching effect
+  useEffect(() => {
+    if (isConnected && chain?.id !== optimism.id) {
+      console.log('Wrong network detected, attempting to switch...');
+      switchNetwork?.(optimism.id).catch((error) => {
+        console.error('Network switch error:', error);
+        setErrorMessage('Please switch to Optimism network manually');
+      });
+    }
+  }, [isConnected, chain, switchNetwork]);
+
+  const handleConnect = async () => {
+    try {
+      setErrorMessage('');
+      console.log('Opening Web3Modal...');
+      await open();
+    } catch (error) {
+      console.error('Connection error:', error);
+      setErrorMessage(`Failed to open wallet selector: ${error.message}`);
+    }
+  };
+
+  const handleDisconnect = async () => {
+    try {
+      await disconnect();
+      setErrorMessage('');
+    } catch (error) {
+      console.error('Disconnect error:', error);
+      setErrorMessage(`Failed to disconnect: ${error.message}`);
+    }
+  };
 
   const styles = {
     container: {
@@ -72,196 +141,6 @@ const WalletConnect = () => {
     },
   };
 
-  // Chain IDs for network checking
-  const OPTIMISM_CHAIN_ID = '0xa';  // hex
-  const OPTIMISM_CHAIN_ID_DECIMAL = 10;  // decimal
-
-  const OPTIMISM_PARAMS = {
-    chainId: OPTIMISM_CHAIN_ID,
-    chainName: 'Optimism',
-    nativeCurrency: {
-      name: 'Ethereum',
-      symbol: 'ETH',
-      decimals: 18
-    },
-    rpcUrls: ['https://mainnet.optimism.io'],
-    blockExplorerUrls: ['https://optimistic.etherscan.io']
-  };
-
-  const switchToOptimism = async (provider) => {
-    try {
-      console.log('Attempting to switch to Optimism...');
-      await provider.request({
-        method: 'wallet_switchEthereumChain',
-        params: [{ chainId: OPTIMISM_CHAIN_ID }],
-      });
-      console.log('Successfully switched to Optimism');
-      return true;
-    } catch (switchError) {
-      console.log('Switch error:', switchError);
-      // This error code indicates that the chain has not been added to MetaMask
-      if (switchError.code === 4902 || switchError.message.includes("Unrecognized chain ID")) {
-        try {
-          console.log('Attempting to add Optimism network...');
-          await provider.request({
-            method: 'wallet_addEthereumChain',
-            params: [OPTIMISM_PARAMS],
-          });
-          console.log('Successfully added Optimism network');
-          return true;
-        } catch (addError) {
-          console.error('Error adding network:', addError);
-          setErrorMessage('Failed to add Optimism network. Please add it manually.');
-          return false;
-        }
-      }
-      console.error('Network switch error:', switchError);
-      setErrorMessage('Failed to switch network. Please try manually switching to Optimism.');
-      return false;
-    }
-  };
-
-  useEffect(() => {
-    const initWeb3Modal = async () => {
-      const providerOptions = {
-        injected: {
-          display: {
-            name: 'MetaMask',
-            description: 'Connect using browser wallet',
-            logo: 'https://upload.wikimedia.org/wikipedia/commons/3/36/MetaMask_Fox.svg'
-          },
-          package: null
-        },
-        walletconnect: {
-          package: WalletConnectProvider,
-          options: {
-            rpc: {
-              10: 'https://mainnet.optimism.io'
-            },
-            network: 'optimism',
-            qrcodeModalOptions: {
-              mobileLinks: ['rainbow', 'metamask', 'ledger'],
-            },
-          },
-          display: {
-            name: 'WalletConnect',
-            description: 'Connect using WalletConnect',
-            logo: 'https://1000logos.net/wp-content/uploads/2022/05/WalletConnect-Logo.png'
-          }
-        }
-      };
-
-      window.web3Modal = new Web3Modal({
-        network: "optimism",
-        providerOptions,
-        theme: {
-          background: '#100c1c',
-          main: '#ffe3b3',
-          secondary: '#c79884',
-          border: '#28265a',
-          hover: '#713c4e'
-        },
-        cacheProvider: true,
-        disableInjectedProvider: false
-      });
-
-      if (window.web3Modal.cachedProvider) {
-        connectWallet();
-      }
-    };
-
-    initWeb3Modal();
-  }, []);
-
-  const connectWallet = async () => {
-    try {
-      setErrorMessage('');
-      const provider = await window.web3Modal.connect();
-      const web3Instance = new Web3(provider);
-      
-      const networkId = await web3Instance.eth.net.getId();
-      const networkHex = `0x${networkId.toString(16)}`;
-      
-      console.log('Current network:', networkId, networkHex);
-
-      if (networkId !== OPTIMISM_CHAIN_ID_DECIMAL && networkHex !== OPTIMISM_CHAIN_ID) {
-        console.log('Wrong network detected, attempting to switch...');
-        const switched = await switchToOptimism(provider);
-        if (!switched) {
-          console.log('Failed to switch network');
-          return;
-        }
-        
-        // Wait for network switch to complete
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        
-        // Re-initialize web3 after network switch
-        const updatedWeb3 = new Web3(provider);
-        const updatedNetworkId = await updatedWeb3.eth.net.getId();
-        const updatedNetworkHex = `0x${updatedNetworkId.toString(16)}`;
-        
-        console.log('Updated network:', updatedNetworkId, updatedNetworkHex);
-        
-        if (updatedNetworkId !== OPTIMISM_CHAIN_ID_DECIMAL && updatedNetworkHex !== OPTIMISM_CHAIN_ID) {
-          setErrorMessage('Please ensure you are connected to Optimism network');
-          return;
-        }
-        setWeb3(updatedWeb3);
-      } else {
-        setWeb3(web3Instance);
-      }
-
-      const accounts = await web3Instance.eth.getAccounts();
-      setAccount(accounts[0]);
-      setIsConnected(true);
-
-      // Handle wallet events
-      provider.on('accountsChanged', (accounts) => {
-        if (accounts.length === 0) {
-          disconnectWallet();
-        } else {
-          setAccount(accounts[0]);
-        }
-      });
-
-      provider.on('chainChanged', async (chainId) => {
-        const chainIdDecimal = parseInt(chainId, 16);
-        console.log('Chain changed:', chainId, chainIdDecimal);
-        if (chainIdDecimal !== OPTIMISM_CHAIN_ID_DECIMAL && chainId !== OPTIMISM_CHAIN_ID) {
-          console.log('Wrong chain detected after change');
-          const switched = await switchToOptimism(provider);
-          if (!switched) {
-            disconnectWallet();
-          }
-        }
-      });
-
-      provider.on('disconnect', () => {
-        console.log('Provider disconnected');
-        disconnectWallet();
-      });
-
-    } catch (error) {
-      console.error('Connection error:', error);
-      if (error.message?.includes('User rejected')) {
-        setErrorMessage('Connection rejected by user');
-      } else {
-        setErrorMessage(`Failed to connect wallet: ${error.message}`);
-      }
-    }
-  };
-
-  const disconnectWallet = async () => {
-    if (window.web3Modal) {
-      await window.web3Modal.clearCachedProvider();
-      setWeb3(null);
-      setAccount('');
-      setIsConnected(false);
-      setErrorMessage('');
-      console.log('Wallet disconnected');
-    }
-  };
-
   return (
     <motion.div
       style={styles.container}
@@ -283,7 +162,8 @@ const WalletConnect = () => {
       {!isConnected ? (
         <motion.button
           style={styles.walletButton}
-          onClick={connectWallet}
+          onClick={handleConnect}
+          disabled={isLoading}
           whileHover={prefersReducedMotion ? {} : {
             scale: 1.05,
             backgroundColor: '#28265a',
@@ -294,7 +174,7 @@ const WalletConnect = () => {
           whileTap={prefersReducedMotion ? {} : { scale: 0.95 }}
         >
           <Wallet size={20} />
-          Connect Wallet
+          {isLoading ? 'Connecting...' : 'Connect Wallet'}
         </motion.button>
       ) : (
         <motion.div
@@ -307,11 +187,11 @@ const WalletConnect = () => {
             Connected to Optimism
           </div>
           <div style={styles.address}>
-            {account.slice(0, 6)}...{account.slice(-4)}
+            {address ? `${address.slice(0, 6)}...${address.slice(-4)}` : ''}
           </div>
           <motion.button
             style={{...styles.walletButton, backgroundColor: 'transparent', border: '2px solid #93b3d8', color: '#93b3d8'}}
-            onClick={disconnectWallet}
+            onClick={handleDisconnect}
             whileHover={prefersReducedMotion ? {} : {
               scale: 1.05,
               backgroundColor: '#713c4e',
@@ -326,6 +206,32 @@ const WalletConnect = () => {
         </motion.div>
       )}
     </motion.div>
+  );
+};
+
+const WalletConnect = () => {
+  return (
+    <>
+      <WagmiConfig config={wagmiConfig}>
+        <WalletConnectButton />
+      </WagmiConfig>
+
+      <Web3Modal
+        projectId={projectId}
+        ethereumClient={ethereumClient}
+        defaultChain={optimism}
+        themeMode="dark"
+        themeVariables={{
+          '--w3m-background-color': '#100c1c',
+          '--w3m-accent-color': '#713c4e',
+          '--w3m-text-color': '#ffe3b3',
+          '--w3m-border-color': '#28265a',
+          '--w3m-button-hover-bg-color': '#28265a',
+          '--w3m-menu-bg-color': '#100c1c',
+          '--w3m-overlay-background-color': 'rgba(16, 12, 28, 0.8)',
+        }}
+      />
+    </>
   );
 };
 

@@ -162,10 +162,6 @@ function Characters() {
       zIndex: 1,
     },
     icon: {
-      color: '#713c4e', // Updated from rgba
-      transition: 'color 0.3s ease',
-    },
-    icon: {
       color: 'rgba(113, 60, 78, 0.8)',
       transition: 'color 0.3s ease',
     },
