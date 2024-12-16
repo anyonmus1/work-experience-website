@@ -1,9 +1,0 @@
-declare module 'stream-browserify';
-declare module 'assert';
-declare module 'stream-http';
-declare module 'https-browserify';
-declare module 'os-browserify';
-declare module 'url';
-declare module 'crypto-browserify';
-declare module 'path-browserify';
-declare module 'browserify-zlib';
