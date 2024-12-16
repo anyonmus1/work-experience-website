@@ -8,7 +8,7 @@ const roadmapData = [
     timeline: "Q4 2024 - Q1 2025",
     icon: <Rocket size={24} strokeWidth={1.5} color="#713c4e" />,
     items: [
-      "Launch of CWB token on Ethereum mainnet",
+      "Launch of CWB token on Optimism mainnet",
       "Initial exchange listings and liquidity provision",
       "Community building initiatives and social media campaigns",
       "Release of basic governance features for community voting",
@@ -38,7 +38,7 @@ const roadmapData = [
     timeline: "Q4 2025 - Q2 2026",
     icon: <Globe size={24} strokeWidth={1.5} color="#713c4e" />,
     items: [
-      "Integration with Binance Smart Chain for cross-chain functionality",
+      "Integration with other L1s Chain for cross-chain functionality",
       "Launch of NFT marketplace for meme trading",
       "Implementation of DAO structure for fully decentralized governance",
       "Development of educational resources",
@@ -54,7 +54,6 @@ const roadmapData = [
     icon: <Zap size={24} strokeWidth={1.5} color="#713c4e" />,
     items: [
       "Launch of May-Bellets DeFi suite",
-      "Implementation of layer 2 scaling solution",
       "Major partnerships with traditional brands",
       "First annual MooCon conference",
       "Establishment of May-Bellets Grants program",
@@ -83,7 +82,7 @@ function Roadmap() {
       backgroundPosition: 'center',
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
-      '@media (min-width: 768px)': {
+      '@media (minwidth: 768px)': {
         padding: '4rem 2rem',
       },
     },
@@ -106,7 +105,7 @@ function Roadmap() {
       padding: '2rem 1rem',
       backgroundColor: '#100c1c',
       position: 'relative',
-      '@media (min-width: 768px)': {
+      '@media (minwidth: 768px)': {
         padding: '4rem 2rem',
       },
     },
@@ -123,7 +122,7 @@ function Roadmap() {
       height: '100%',
       backgroundColor: '#713c4e',
       opacity: 0.3,
-      '@media (min-width: 768px)': {
+      '@media (minwidth: 768px)': {
         left: '50%',
         transform: 'translateX(-50%)',
       },
@@ -133,7 +132,7 @@ function Roadmap() {
       flexDirection: 'column',
       marginBottom: '4rem',
       position: 'relative',
-      '@media (min-width: 768px)': {
+      '@media (minwidth: 768px)': {
         flexDirection: 'row',
       },
     },
@@ -146,7 +145,7 @@ function Roadmap() {
       border: '1px solid rgba(255,255,255,0.1)',
       position: 'relative',
       transition: 'all 0.3s ease',
-      '@media (min-width: 768px)': {
+      '@media (minwidth: 768px)': {
         padding: '2rem',
         margin: '0 2rem',
       },
@@ -180,7 +179,7 @@ function Roadmap() {
       zIndex: 2,
       border: '2px solid #713c4e',
       transition: 'all 0.3s ease',
-      '@media (min-width: 768px)': {
+      '@media (minwidth: 768px)': {
         left: '50%',
         transform: 'translateX(-50%)',
       },
@@ -333,10 +332,10 @@ function Roadmap() {
           whileInView={{ opacity: 0.8 }}
           viewport={{ once: true }}
         >
-          This roadmap is a living document and may be adjusted based on technological 
+          *** This roadmap is a living document and may be adjusted based on technological 
           advancements, market conditions, and community feedback. We're committed to 
           transparency and will keep our community informed of any changes or updates 
-          to our plans.
+          to our plans. ***
         </motion.p>
       </div>
     </div>

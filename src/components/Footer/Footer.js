@@ -75,9 +75,10 @@ function Footer() {
           <h3 style={styles.sectionTitle}>Quick Links</h3>
           <a href="/" style={styles.link}>Home</a>
           <a href="/about" style={styles.link}>About</a>
-          <a href="/characters" style={styles.link}>The Militia</a>
+          <a href="/militia" style={styles.link}>The Militia</a>
           <a href="/roadmap" style={styles.link}>Roadmap</a>
           <a href="/tokenomics" style={styles.link}>Tokenomics</a>
+          <a href="/connect" style={styles.link}>Connect</a>
         </div>
         <div style={styles.footerSection}>
           <h3 style={styles.sectionTitle}>Join the Herd</h3>

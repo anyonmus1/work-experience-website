@@ -37,14 +37,14 @@ function Tokenomics() {
     content: {
       padding: '2rem 1rem',
       backgroundColor: '#100c1c',
-      '@media (min-width: 768px)': {
+      '@media (minwidth: 768px)': {
         padding: '4rem 2rem',
       },
     },
     section: {
       maxWidth: '1200px',
       margin: '0 auto 4rem',
-      '@media (min-width: 768px)': {
+      '@media (minwidth: 768px)': {
         margin: '0 auto 6rem',
       },
     },
@@ -59,10 +59,10 @@ function Tokenomics() {
       gridTemplateColumns: '1fr',
       gap: '1rem',
       margin: '2rem 0',
-      '@media (min-width: 640px)': {
+      '@media (minwidth: 640px)': {
         gridTemplateColumns: 'repeat(2, 1fr)',
       },
-      '@media (min-width: 1024px)': {
+      '@media (minwidth: 1024px)': {
         gridTemplateColumns: 'repeat(4, 1fr)',
         gap: '2rem',
       },
@@ -73,7 +73,12 @@ function Tokenomics() {
       borderRadius: '15px',
       border: '1px solid rgba(255,255,255,0.1)',
       transition: 'all 0.3s ease',
-      '@media (min-width: 768px)': {
+      textAlign: 'center', 
+      display: 'flex', 
+      flexDirection: 'column', 
+      alignItems: 'center', 
+      justifyContent: 'center', 
+      '@media (minwidth: 768px)': {
         padding: '2rem',
       },
     },
@@ -89,6 +94,7 @@ function Tokenomics() {
       marginBottom: '0.5rem',
       textShadow: '0 2px 4px rgba(0,0,0,0.1)',
       wordBreak: 'break-word',
+      textAlign: 'center',
     },
     distributionContainer: {
       height: 'clamp(300px, 60vh, 600px)',
@@ -102,7 +108,7 @@ function Tokenomics() {
       marginTop: '2rem',
       overflowX: 'auto',
       display: 'block',
-      '@media (min-width: 768px)': {
+      '@media (minwidth: 768px)': {
         display: 'table',
       },
     },
@@ -124,7 +130,7 @@ function Tokenomics() {
       gridTemplateColumns: '1fr',
       gap: '1rem',
       margin: '2rem 0',
-      '@media (min-width: 768px)': {
+      '@media (minwidth: 768px)': {
         gridTemplateColumns: 'repeat(3, 1fr)',
         gap: '2rem',
         margin: '3rem 0',
@@ -136,7 +142,11 @@ function Tokenomics() {
       borderRadius: '15px',
       border: '1px solid rgba(255,255,255,0.1)',
       transition: 'all 0.3s ease',
-      '@media (min-width: 768px)': {
+      textAlign: 'center', 
+     display: 'flex', 
+      flexDirection: 'column', 
+     alignItems: 'center', 
+      '@media (minwidth: 768px)': {
         padding: '2rem',
       },
     },

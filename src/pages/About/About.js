@@ -19,7 +19,7 @@ function About() {
       backgroundPosition: 'center',
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
-      '@media (min-width: 768px)': {
+      '@media (minwidth: 768px)': {
         padding: '4rem 2rem',
       },
     },
@@ -41,14 +41,14 @@ function About() {
     content: {
       padding: '2rem 1rem',
       backgroundColor: '#100c1c',
-      '@media (min-width: 768px)': {
+      '@media (minwidth: 768px)': {
         padding: '4rem 2rem',
       },
     },
     section: {
       maxWidth: '1200px',
       margin: '0 auto 4rem',
-      '@media (min-width: 768px)': {
+      '@media (minwidth: 768px)': {
         margin: '0 auto 6rem',
       },
     },
@@ -87,7 +87,7 @@ function About() {
       padding: '1.5rem',
       borderLeft: '4px solid #713c4e',
       backgroundColor: 'rgba(147, 179, 216, 0.1)',
-      '@media (min-width: 768px)': {
+      '@media (minwidth: 768px)': {
         padding: '2rem',
       },
     },
@@ -96,10 +96,10 @@ function About() {
       gridTemplateColumns: '1fr',
       gap: '1.5rem',
       margin: '2rem 0',
-      '@media (min-width: 640px)': {
+      '@media (minwidth: 640px)': {
         gridTemplateColumns: 'repeat(2, 1fr)',
       },
-      '@media (min-width: 1024px)': {
+      '@media (minwidth: 1024px)': {
         gridTemplateColumns: 'repeat(3, 1fr)',
         gap: '2rem',
         margin: '3rem 0',
@@ -111,7 +111,7 @@ function About() {
       borderRadius: '15px',
       border: '1px solid rgba(255,255,255,0.1)',
       transition: 'all 0.3s ease',
-      '@media (min-width: 768px)': {
+      '@media (minwidth: 768px)': {
         padding: '2rem',
       },
     },
@@ -143,7 +143,7 @@ function About() {
       gridTemplateColumns: '1fr',
       gap: '1.5rem',
       margin: '2rem 0',
-      '@media (min-width: 768px)': {
+      '@media (minwidth: 768px)': {
         gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
         gap: '2rem',
         margin: '3rem 0',
@@ -163,7 +163,7 @@ function About() {
       textAlign: 'center',
       padding: '2rem 1rem',
       backgroundColor: 'rgba(40, 38, 90, 0.2)',
-      '@media (min-width: 768px)': {
+      '@media (minwidth: 768px)': {
         padding: '4rem 2rem',
       },
     },
