@@ -6,9 +6,7 @@ import { configureChains, createConfig, WagmiConfig, useAccount, useConnect, use
 import { optimism } from 'wagmi/chains';
 import { Wallet, ExternalLink, Check, AlertCircle } from 'lucide-react';
 
-
 const projectId = 'fd5220888cc12eb79beb00ce1b866589';
-
 
 // Configure chains and providers
 const { chains, publicClient } = configureChains(
