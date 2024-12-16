@@ -3,20 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@react-three/drei": "^9.117.3",
-    "@react-three/fiber": "^8.17.10",
-    "@solana/wallet-adapter-base": "^0.9.23",
-    "@solana/wallet-adapter-react": "^0.15.35",
-    "@solana/wallet-adapter-react-ui": "^0.9.35",
-    "@solana/wallet-adapter-wallets": "^0.19.32",
-    "@solana/web3.js": "^1.95.3",
-    "@tanstack/react-query": "^5.62.7",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
-    "@walletconnect/web3-provider": "^1.8.0",
-    "@web3modal/ethereum": "^2.7.1",
-    "@web3modal/react": "^2.7.1",
+    "@web3modal/ethereum": "^3.0.0",
+    "@web3modal/react": "^3.0.0",
     "framer-motion": "^11.14.4",
     "lucide-react": "^0.460.0",
     "react": "^18.3.1",
@@ -24,14 +15,9 @@
     "react-router-dom": "^6.26.2",
     "react-scripts": "5.0.1",
     "recharts": "^2.13.3",
-    "source-map-loader": "^5.0.0",
-    "three": "^0.170.0",
-    "typescript": "^5.7.2",
-    "viem": "^1.21.4",
-    "wagmi": "^1.4.12",
-    "web-vitals": "^2.1.4",
-    "web3": "^4.16.0",
-    "web3modal": "^1.9.12"
+    "viem": "^2.0.0",
+    "wagmi": "^2.0.0",
+    "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-app-rewired start",
@@ -72,6 +58,10 @@
     "react-refresh": "^0.16.0",
     "stream-browserify": "^3.0.0",
     "stream-http": "^3.2.0",
-    "url": "^0.11.4"
+    "url": "^0.11.4",
+    "util": "^0.12.5",
+    "stream-polyfill": "^3.0.3",
+    "querystring-es3": "^0.2.1",
+    "constants-browserify": "^1.0.0"
   }
 }
