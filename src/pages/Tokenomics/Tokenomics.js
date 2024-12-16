@@ -106,24 +106,31 @@ function Tokenomics() {
       width: '100%',
       borderCollapse: 'collapse',
       marginTop: '2rem',
+      minWidth: 'auto', // Changed from fixed width
       overflowX: 'auto',
-      display: 'block',
-      '@media (minwidth: 768px)': {
-        display: 'table',
-      },
+      display: 'table', // Changed from block
+      fontSize: 'clamp(0.8rem, 1.5vw, 1rem)', // Add responsive font size
     },
     tableHeader: {
       backgroundColor: 'rgba(40, 38, 90, 0.3)',
-      padding: '1rem',
+      padding: '0.75rem', // Reduced padding for mobile
       textAlign: 'left',
       color: '#ffe3b3',
-      whiteSpace: 'nowrap',
+      whiteSpace: 'normal', // Changed from nowrap
+      '@media (minwidth: 768px)': {
+        padding: '1rem',
+        whiteSpace: 'nowrap',
+      },
     },
     tableCell: {
-      padding: '1rem',
+      padding: '0.75rem', // Reduced padding for mobile
       borderBottom: '1px solid rgba(147, 179, 216, 0.1)',
       color: '#93b3d8',
-      whiteSpace: 'nowrap',
+      whiteSpace: 'normal', // Changed from nowrap
+      '@media (minwidth: 768px)': {
+        padding: '1rem',
+        whiteSpace: 'nowrap',
+      },
     },
     featuresGrid: {
       display: 'grid',
@@ -421,7 +428,12 @@ function Tokenomics() {
               border: '1px solid rgba(252, 255, 244, 0.2)',
             }}
           >
-            <div style={{ overflowX: 'auto' }}>
+            <div style={{ 
+              overflowX: 'auto', 
+              width: '100%',
+              WebkitOverflowScrolling: 'touch',
+              msOverflowStyle: '-ms-autohiding-scrollbar'
+            }}>
               <table style={styles.table}>
                 <thead>
                   <tr>
@@ -430,17 +442,17 @@ function Tokenomics() {
                     <th style={styles.tableHeader}>Vesting Terms</th>
                   </tr>
                 </thead>
-                  <tbody>
-                    {[1, 2, 3, 4, 5].map((num) => (
-                      <tr key={num}>
-                        <td style={styles.tableCell}>Founder {num}</td>
-                        <td style={styles.tableCell}>10 Billion CWB</td>
-                        <td style={styles.tableCell}>12-month cliff, 36-month linear vesting</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+                <tbody>
+                  {[1, 2, 3, 4, 5].map((num) => (
+                    <tr key={num}>
+                      <td style={styles.tableCell}>Founder {num}</td>
+                      <td style={styles.tableCell}>10 Billion CWB</td>
+                      <td style={styles.tableCell}>12-month cliff, 36-month linear vesting</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
             </motion.div>
           </motion.section>
         </div>
