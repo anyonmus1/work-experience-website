@@ -22,7 +22,7 @@ function Home() {
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
       position: 'relative',
-      '@media (min-width: 768px)': {
+      '@media (minwidth: 768px)': {
         padding: '6rem 2rem',
       },
     },
@@ -70,7 +70,7 @@ function Home() {
       boxShadow: '0 4px 15px rgba(252, 255, 244, 0.2)',
       transition: 'all 0.3s ease',
       whiteSpace: 'nowrap',
-      '@media (min-width: 768px)': {
+      '@media (minwidth: 768px)': {
         padding: '1rem 2rem',
       },
     },
@@ -87,7 +87,7 @@ function Home() {
       backgroundColor: '#100c1c',
       maxWidth: '1400px',
       margin: '0 auto',
-      '@media (min-width: 768px)': {
+      '@media (minwidth: 768px)': {
         padding: '4rem 2rem',
         gap: '2rem',
       },
@@ -105,7 +105,7 @@ function Home() {
       position: 'relative',
       overflow: 'hidden',
       transition: 'all 0.3s ease',
-      '@media (min-width: 768px)': {
+      '@media (minwidth: 768px)': {
         padding: '2rem',
       },
     },
@@ -134,7 +134,7 @@ function Home() {
     stats: {
       padding: '2rem 1rem',
       backgroundColor: '#93b3d8',
-      '@media (min-width: 768px)': {
+      '@media (minwidth: 768px)': {
         padding: '4rem 2rem',
       },
     },
@@ -144,7 +144,7 @@ function Home() {
       gap: '1.5rem',
       maxWidth: '1200px',
       margin: '0 auto',
-      '@media (min-width: 768px)': {
+      '@media (minwidth: 768px)': {
         gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
         gap: '2rem',
       },
@@ -156,7 +156,7 @@ function Home() {
       textAlign: 'center',
       border: '1px solid rgba(147, 179, 216, 0.1)',
       transition: 'all 0.3s ease',
-      '@media (min-width: 768px)': {
+      '@media (minwidth: 768px)': {
         padding: '2rem',
       },
     },
@@ -175,7 +175,7 @@ function Home() {
       padding: '2rem 1rem',
       backgroundColor: '#100c1c',
       textAlign: 'center',
-      '@media (min-width: 768px)': {
+      '@media (minwidth: 768px)': {
         padding: '4rem 2rem',
       },
     },
