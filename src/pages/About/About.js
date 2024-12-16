@@ -65,6 +65,19 @@ function About() {
       marginBottom: '2rem',
       color: '#93b3d8',
     },
+    highlightedText: {  // New style for the emphasized paragraph
+      fontSize: 'clamp(1.2rem, 2.5vw, 1.4rem)',
+      lineHeight: '1.8',
+      marginBottom: '2rem',
+      color: '#93b3d8',
+      fontWeight: '500',
+      maxWidth: '1000px',
+      margin: '0 auto 2rem',
+      padding: '1.5rem',
+      borderRadius: '8px',
+      backgroundColor: 'rgba(147, 179, 216, 0.05)',
+      border: '1px solid rgba(147, 179, 216, 0.1)',
+    },
     quote: {
       fontStyle: 'italic',
       color: '#ffe3b3',
@@ -248,9 +261,16 @@ function About() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
           >
-            <p>The once-fertile fields of meme coins have been ravaged by pump-and-dump mercenaries 
-            and quick-profit poachers. Trust has been eroded, communities scattered, and the joy 
-            of meme culture diluted. The May-Bellets Militia stands ready to change the game.</p>
+            <motion.p 
+              style={styles.highlightedText}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              The once-fertile fields of meme coins have been ravaged by pump-and-dump mercenaries 
+              and quick-profit poachers. Trust has been eroded, communities scattered, and the joy 
+              of meme culture diluted. The May-Bellets Militia stands ready to change the game.
+            </motion.p>
             
             <div style={styles.quote}>
               "In pastures of pixels and fields of finance, we stand united. Our strength is our 

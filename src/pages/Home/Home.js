@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { Shield, Users, ChartBar, Bell, Leaf, Target, Heart } from 'lucide-react';
+import './Home.css'
 
 function Home() {
   // Hook to respect user's motion preferences
@@ -79,19 +80,6 @@ function Home() {
       border: '2px solid #93b3d8',
       color: '#93b3d8',
     },
-    features: {
-      display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-      gap: '1.5rem',
-      padding: '2rem 1rem',
-      backgroundColor: '#100c1c',
-      maxWidth: '1400px',
-      margin: '0 auto',
-      '@media (minwidth: 768px)': {
-        padding: '4rem 2rem',
-        gap: '2rem',
-      },
-    },
     feature: {
       padding: '1.5rem',
       backgroundColor: 'rgba(147, 179, 216, 0.1)',
@@ -107,7 +95,7 @@ function Home() {
       transition: 'all 0.3s ease',
       '@media (minwidth: 768px)': {
         padding: '2rem',
-      },
+      }
     },
     featureIcon: {
       backgroundColor: '#28265a',
@@ -197,32 +185,38 @@ function Home() {
     {
       icon: <Shield size={32} />,
       title: "Fort Knox of the Farmyard",
-      description: "State-of-the-art security measures including smart contract audits and anti-pump-and-dump mechanisms."
+      description: "State-of-the-art security measures including smart contract audits and anti-pump-and-dump mechanisms.",
+      gridArea: 'knox'
     },
     {
       icon: <Users size={32} />,
       title: "Community Governance",
-      description: "Every member has a voice through our innovative Proof of Steak mechanism and decentralized governance."
+      description: "Every member has a voice through our innovative Proof of Steak mechanism and decentralized governance.",
+      gridArea: 'gov'
     },
     {
       icon: <Target size={32} />,
       title: "Strategic Vision",
-      description: "Clear roadmap with planned developments, partnerships, and ecosystem expansion initiatives."
+      description: "Clear roadmap with planned developments, partnerships, and ecosystem expansion initiatives.",
+      gridArea: 'vision'
     },
     {
       icon: <Bell size={32} />,
       title: "Revolutionary Tokenomics",
-      description: "Fair distribution with 50% allocated to community rewards and ecosystem growth."
+      description: "Fair distribution with 50% allocated to community rewards and ecosystem growth.",
+      gridArea: 'token'
     },
     {
       icon: <Leaf size={32} />,
       title: "Sustainable Growth",
-      description: "Smart contract-powered ecosystem ensures continuous development, liquidity provision, and community rewards"
+      description: "Smart contract-powered ecosystem ensures continuous development, liquidity provision, and community rewards",
+      gridArea: 'growth'
     },
     {
       icon: <Heart size={32} />,
       title: "Community First",
-      description: "Regular events, rewards, and engagement initiatives to nurture our growing community."
+      description: "Regular events, rewards, and engagement initiatives to nurture our growing community.",
+      gridArea: 'first'
     }
   ];
 
@@ -299,57 +293,57 @@ function Home() {
       </motion.div>
 
       <motion.div 
-        style={styles.features}
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true, margin: "-50px" }}
+  className="features-grid"
+  initial={{ opacity: 0 }}
+  whileInView={{ opacity: 1 }}
+  viewport={{ once: true, margin: "-50px" }}
+>
+  {features.map((feature, index) => (
+    <motion.div
+      key={index}
+      style={styles.feature}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: prefersReducedMotion ? 0 : index * 0.1 }}
+      whileHover={prefersReducedMotion ? {} : { 
+        y: -10,
+        boxShadow: '0 10px 30px rgba(252, 255, 244, 0.1)',
+        border: '1px solid rgba(252, 255, 244, 0.2)',
+      }}
+    >
+      <motion.div 
+        style={styles.featureIcon}
+        whileHover={prefersReducedMotion ? {} : {
+          backgroundColor: '#713c4e',
+        }}
       >
-        {features.map((feature, index) => (
-          <motion.div
-            key={index}
-            style={styles.feature}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: prefersReducedMotion ? 0 : index * 0.1 }}
-            whileHover={prefersReducedMotion ? {} : { 
-              y: -10,
-              boxShadow: '0 10px 30px rgba(252, 255, 244, 0.1)',
-              border: '1px solid rgba(252, 255, 244, 0.2)',
-            }}
-          >
-            <motion.div 
-              style={styles.featureIcon}
-              whileHover={prefersReducedMotion ? {} : {
-                backgroundColor: '#713c4e',
-              }}
-            >
-              <motion.div
-                style={styles.icon}
-                whileHover={prefersReducedMotion ? {} : {
-                  color: '#28265a',
-                }}
-              >
-                {feature.icon}
-              </motion.div>
-            </motion.div>
-            <h3 style={styles.featureTitle}>{feature.title}</h3>
-            <p>{feature.description}</p>
-            <motion.div
-              style={{
-                position: 'absolute',
-                bottom: 0,
-                left: 0,
-                width: '100%',
-                height: '3px',
-                background: '#713c4e',
-                opacity: 0,
-              }}
-              whileHover={{ opacity: 0.6 }}
-            />
-          </motion.div>
-        ))}
+        <motion.div
+          style={styles.icon}
+          whileHover={prefersReducedMotion ? {} : {
+            color: '#28265a',
+          }}
+        >
+          {feature.icon}
+        </motion.div>
       </motion.div>
+      <h3 style={styles.featureTitle}>{feature.title}</h3>
+      <p>{feature.description}</p>
+      <motion.div
+        style={{
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          width: '100%',
+          height: '3px',
+          background: '#713c4e',
+          opacity: 0,
+        }}
+        whileHover={{ opacity: 0.6 }}
+      />
+    </motion.div>
+  ))}
+</motion.div>
 
       <div style={styles.stats}>
         <motion.div 
