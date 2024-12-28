@@ -39,13 +39,7 @@ npm install
 
 ```
 
-3. Create a `.env` file in the root directory and add your configuration:
-```bash
-REACT_APP_INFURA_ID=your_infura_id
-REACT_APP_CHAIN_ID=1
-```
-
-4. Start the development server:
+3. Start the development server:
 ```bash
 npm start
 
