@@ -22,7 +22,7 @@ A modern, responsive React-based website for tracking and managing cryptocurrenc
 ## 🚦 Prerequisites
 
 - Node.js (v14.0.0 or later)
-- npm or yarn
+- npm
 - MetaMask or similar Web3 wallet
 
 ## 🔧 Installation
